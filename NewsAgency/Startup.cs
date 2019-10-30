@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.IServices;
+using BusinessLogicLayer.Services;
+using DataAccessLayer.Database;
 using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +12,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace NewsAgency
 {
@@ -24,11 +28,24 @@ namespace NewsAgency
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            //services.AddMvc();  
 
+            services.AddControllersWithViews();
+            
             #region IOC
 
             //services.AddTransient<IGenericRepository, GenericRepository>();
+
+            services.AddTransient<IActionService, ActionService>();
+            services.AddTransient<IAdvertiseService, AdvertiseService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ILinkService, LinkService>();
+            services.AddTransient<INewsCategoryService, NewsCategoryService>();
+            services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ISubscriberService, SubscriberService>();
+            services.AddTransient<IUserRoleService, UserRoleService>();
+            services.AddTransient<IUserService, UserService>();
 
             #endregion
 

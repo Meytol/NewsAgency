@@ -5,12 +5,21 @@ namespace DataAccessLayer.Database
 {
     public class DatabaseContext : DbContext
     {
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options)
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;");
+        }
+
         #region DbSet
 
         public DbSet<Action> Actions { get; set; }
         public DbSet<Advertise> Advertises { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Image> Images { get; set; }
         public DbSet<Link> Links { get; set; }
         public DbSet<News> Newses { get; set; }
         public DbSet<Role> Roles { get; set; }

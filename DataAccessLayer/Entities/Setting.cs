@@ -1,15 +1,12 @@
 ﻿using System;
-using Common.Interfaces.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccessLayer.Entities
 {
-    public class Setting : IAuditable
+    public class Setting 
     {
-        public int Id { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int ViewState { get; set; }
+        [Key]
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }
