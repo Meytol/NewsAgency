@@ -46,23 +46,13 @@
 ================================================== */
 
 @font-face {
-	font-family: "web-vazir";
-	src: url("../fonts/vazir-fd-wl.eot"); /* IE */
-	src: url("../fonts/vazir-fd-wl.eot?#iefix") format("embedded-opentype"), /* IE */
-		 url("../fonts/vazir-fd-wl.woff2") format("woff2"), /* Modern Browsers */
-		 url("../fonts/vazir-fd-wl.woff") format("woff"), /* Modern Browsers */
-		 url("../fonts/vazir-fd-wl.ttf") format("truetype"); /* Safari, Android, iOS */
+	font-family: "web-myriad";
+	src: url("../../fonts/myriad-fd-wl-ext.eot"); /* IE */
+	src: url("../../fonts/myriad-fd-wl-ext.eot?#iefix") format("embedded-opentype"), /* IE */
+		 url("../../fonts/myriad-fd-wl-ext.woff2") format("woff2"), /* Modern Browsers */
+		 url("../../fonts/myriad-fd-wl-ext.woff") format("woff"), /* Modern Browsers */
+		 url("../../fonts/myriad-fd-wl-ext.ttf") format("truetype"); /* Safari, Android, iOS */
 	font-weight: normal;
-}
-
-@font-face {
-	font-family: "web-vazir";
-	src: url("../fonts/vazir-bold-fd-wl.eot"); /* IE */
-	src: url("../fonts/vazir-bold-fd-wl.eot?#iefix") format("embedded-opentype"), /* IE */
-		 url("../fonts/vazir-bold-fd-wl.woff2") format("woff2"), /* Modern Browsers */
-		 url("../fonts/vazir-bold-fd-wl.woff") format("woff"), /* Modern Browsers */
-		 url("../fonts/vazir-bold-fd-wl.ttf") format("truetype"); /* Safari, Android, iOS */
-	font-weight: bold;
 }
 
 .ltr_text {
@@ -73,7 +63,7 @@
 body {
 	background: #fff;
 	color: #333;
-	font-family: 'web-vazir', 'segoe ui', tahoma;
+	font-family: 'web-myriad', 'segoe ui', tahoma;
 	direction: rtl;
 }
 
@@ -500,7 +490,7 @@ ul.list-check li:before {
 }
 
 .pattern-bg {
-	background: #f5f5f5 url(../images/crossword.png);
+	background: #f5f5f5 url(../../images/crossword.png);
 }
 
 a[href^=tel] {
@@ -3174,7 +3164,7 @@ ul.navbar-nav > li.mega-dropdown {
 
 .ts-newsletter {
 	background-color: #f1f1f1;
-	background-image: url(../images/newsletter-icon.png);
+	background-image: url(../../images/newsletter-icon.png);
 	background-repeat: no-repeat;
 	background-position: left bottom;
 	padding: 30px;
@@ -3294,7 +3284,7 @@ label {
 ================================================== */
 
 .boxed-layout {
-	background: #f7f7f7 url(../images/boxed-bg.jpg) no-repeat;
+	background: #f7f7f7 url(../../images/boxed-bg.jpg) no-repeat;
 	background-position: center 0px;
 	background-repeat: no-repeat;
 	background-attachment: fixed;

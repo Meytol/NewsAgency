@@ -27,7 +27,7 @@ namespace DataAccessLayer.Entities
         [NotMapped]
         public string FullName => FirstName + LastName;
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         #region IAuditable Properties
 
@@ -37,7 +37,7 @@ namespace DataAccessLayer.Entities
         public DateTime CreatedOn { get; set; }
         public int UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public int ViewState { get; set; }
+        public int ViewState { get; set; } = (int) Common.Enums.Models.ViewState.Available;
 
         #endregion
 

@@ -1,48 +1,86 @@
 ﻿<!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NewsAgency</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NewsAgency</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> 
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - اخبار موثق</title>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 1398 - NewsAgency - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+
+    <!-- Bootstrap -->
+    <link href="~/Style/Template/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Template styles-->
+    <link href="~/Style/Template/style.css" rel="stylesheet"/>
+    <!-- Responsive styles-->
+    <link href="~/Style/Template/responsive.css" rel="stylesheet"/>
+    <!-- FontAwesome -->
+    <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet"/>
+    <!-- Animation -->
+    <link href="~/Style/Template/animate.css" rel="stylesheet"/>
+    <!-- Owl Carousel -->
+    <link href="~/Style/Template/owl.carousel.min.css" rel="stylesheet"/>
+    <link href="~/Style/Template/owl.theme.default.min.css" rel="stylesheet"/>
+    <!-- Colorbox -->
+    <link href="~/Style/Template/colorbox.css" rel="stylesheet"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+        <script src="~/Script/Template/html5shiv.js"></script>
+        <script src="~/Script/Template/respond.min.js"></script>
+    <![endif]-->
+
+    @RenderSection("PluginStyles", required: false)
+
+    @RenderSection("Styles", required: false)
+
+
+
+
+</head>
+<body class="boxed-layout">
+
+<div class="body-inner">
+
+    <partial name="_TopBar"/>
+
+    @await Component.InvokeAsync("Header")
+
+    @await Component.InvokeAsync("HotNews")
+
+    @RenderBody()
+
+    <partial name="_Footer"/>
+
+</div>
+
+<!-- Javascript Files
+================================================== -->
+<!-- initialize jQuery Library -->
+<script src="~/Script/Template/jquery.js"></script>
+<!-- Bootstrap jQuery -->
+<script src="~/Script/Template/bootstrap.min.js"></script>
+<!-- FontAwesome -->
+<script src="~/lib/fontawesome/js/all.min.js"></script>
+<!-- Owl Carousel -->
+<script src="~/Script/Template/owl.carousel.min.js"></script>
+<!-- Counter -->
+<script src="~/Script/Template/jquery.counterup.min.js"></script>
+<!-- Waypoints -->
+<script src="~/Script/Template/waypoints.min.js"></script>
+<!-- Color box -->
+<script src="~/Script/Template/jquery.colorbox.js"></script>
+<!-- Smoothscroll -->
+<script src="~/Script/Template/smoothscroll.js"></script>
+
+<!-- Template custom -->
+<script src="~/Script/Template/custom.js"></script>
+
+@RenderSection("Plugins", required: false)
+
+@RenderSection("Scripts", required: false)
 </body>
+
 </html>

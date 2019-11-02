@@ -9,7 +9,7 @@ namespace DataAccessLayer.Entities
     {
         public int CategoryId { get; set; }
         public int NewsId { get; set; }
-        public bool IsMain { get; set; }
+        public bool IsMain { get; set; } = false;
 
         #region IAuditable Properties
 
@@ -19,7 +19,7 @@ namespace DataAccessLayer.Entities
         public DateTime CreatedOn { get; set; }
         public int UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public int ViewState { get; set; }
+        public int ViewState { get; set; } = (int) Common.Enums.Models.ViewState.Available;
 
         #endregion
 

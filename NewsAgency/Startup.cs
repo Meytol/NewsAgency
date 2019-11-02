@@ -9,6 +9,7 @@ using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,10 +29,13 @@ namespace NewsAgency
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc();  
-
             services.AddControllersWithViews();
-            
+
+            services.AddMvc().AddRazorRuntimeCompilation();
+
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("NewsAgencyDbConnection")));
+
             #region IOC
 
             //services.AddTransient<IGenericRepository, GenericRepository>();
@@ -64,6 +68,13 @@ namespace NewsAgency
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
+                context.Database.EnsureCreated();
+            }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

@@ -12,7 +12,6 @@ namespace DataAccessLayer.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;");
         }
 
         #region DbSet
@@ -20,8 +19,11 @@ namespace DataAccessLayer.Database
         public DbSet<Action> Actions { get; set; }
         public DbSet<Advertise> Advertises { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<HotNews> HotNewses { get; set; }
         public DbSet<Link> Links { get; set; }
         public DbSet<News> Newses { get; set; }
+        public DbSet<NewsCategory> NewsCategories { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RoleAction> RoleActions { get; set; }
         public DbSet<Setting> Settings { get; set; }
