@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Common.Interfaces.Models;
 
 namespace DataAccessLayer.Entities
 {
-    public class HotNews
+    public class HotNews : IAuditable
     {
         public int NewsId { get; set; }
 

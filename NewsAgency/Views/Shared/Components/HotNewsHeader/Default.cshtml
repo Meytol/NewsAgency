@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BusinessLogicLayer.ViewModels.HotNews.HotNewsHeader>
+
+<div class="trending-light hidden-xs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="trending-title">خبرهای داغ</h3>
+                <div id="trending-slide" class="owl-carousel owl-theme trending-slide">
+                    @foreach (var item in Model)
+                    {
+                        <div class="item">
+                            <div class="post-content">
+                                <h2 class="post-title title-small">
+                                    <a href="@item.Href">@item.NewsTitle</a>
+                                </h2>
+                            </div><!-- Post content end -->
+                        </div><!-- Item end -->
+                    }
+                    
+                </div><!-- Carousel end -->
+            </div><!-- Col end -->
+        </div><!--/ Row end -->
+    </div><!--/ Container end -->
+</div><!--/ Trending end -->

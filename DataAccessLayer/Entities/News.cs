@@ -31,7 +31,7 @@ namespace DataAccessLayer.Entities
 
         #region Relations
 
-        public ICollection<User> Author { get; set; }
+        public User Author { get; set; }
         public ICollection<NewsCategory> NewsCategories { get; set; }
 
         #endregion

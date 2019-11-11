@@ -44,6 +44,7 @@ namespace DataAccessLayer.Entities
         #region Relations
 
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<News> Newses { get; set; }
 
         #endregion
     }
