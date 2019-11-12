@@ -13,9 +13,9 @@
                             <img src="@item.ImageUrl" alt="@item.NewsTitle">
                             <div class="featured-post">
                                 <div class="post-content">
-                                    <a class="post-cat" href="@Url.Action(nameof(Index),"Category",new {@id = item.CategoryId})">@item.CategoryTitle</a>
+                                    <a class="post-cat" href="@Url.Action(action: nameof(Index),controller: "Category",values: new {@id = item.CategoryId})">@item.CategoryTitle</a>
                                     <h2 class="post-title title-extra-large">
-                                        <a href="@Url.Action(nameof(Index),"News",new {@id = item.NewsId})">
+                                        <a href="@Url.Action(action: nameof(Index),controller: "News",values: new {@id = item.NewsId})">
                                             @item.NewsTitle
                                         </a>
                                     </h2>
@@ -35,7 +35,7 @@
 
                     @for (int i = 0; i < 4; i++)
                     {
-                        var news = @Model.ElementAtOrDefault(i);
+                        var news = @Model.ElementAtOrDefault(index: i);
                         <div class="col-sm-6 pad-r-small">
                             <div class="post-overaly-style contentTop fourNewsboxTop clearfix">
                                 <div class="post-thumb">
@@ -43,10 +43,10 @@
                                 </div>
                                 <div class="post-content">
                                     
-                                    <a class="post-cat" href="@Url.Action(nameof(Index),"Category",new {@id = news.CategoryId})">@news.CategoryTitle</a>
+                                    <a class="post-cat" href="@Url.Action(action: nameof(Index),controller: "Category",values: new {@id = news.CategoryId})">@news.CategoryTitle</a>
 
                                     <h2 class="post-title title-medium">
-                                        <a href="@Url.Action(nameof(Index),"News",new {@id=news.NewsId})">@news.NewsTitle</a>
+                                        <a href="@Url.Action(action: nameof(Index),controller: "News",values: new {@id=news.NewsId})">@news.NewsTitle</a>
                                     </h2>
                                 </div><!-- Post content end -->
                             </div><!-- Post Overaly end -->

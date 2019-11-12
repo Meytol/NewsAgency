@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - اخبار موثق</title>
+    <title>@ViewData[index: "Title"] - اخبار موثق</title>
 
     <!--Favicon-->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -32,9 +32,9 @@
         <script src="~/Script/Template/respond.min.js"></script>
     <![endif]-->
 
-    @RenderSection("PluginStyles", required: false)
+    @RenderSection(name: "PluginStyles", required: false)
 
-    @RenderSection("Styles", required: false)
+    @RenderSection(name: "Styles", required: false)
 
 
 
@@ -46,9 +46,9 @@
 
     <partial name="_TopBar"/>
 
-    @await Component.InvokeAsync("Header")
+    @await Component.InvokeAsync(name: "Header")
 
-    @await Component.InvokeAsync("HotNewsHeader")
+    @await Component.InvokeAsync(name: "HotNewsHeader")
 
     @RenderBody()
 
@@ -78,9 +78,9 @@
 <!-- Template custom -->
 <script src="~/Script/Template/custom.js"></script>
 
-@RenderSection("Plugins", required: false)
+@RenderSection(name: "Plugins", required: false)
 
-@RenderSection("Scripts", required: false)
+@RenderSection(name: "Scripts", required: false)
 </body>
 
 </html>

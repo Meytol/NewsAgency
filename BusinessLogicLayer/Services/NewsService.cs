@@ -23,7 +23,7 @@ namespace BusinessLogicLayer.Services
             _categoryService = categoryService;
         }
 
-        public async Task<CategoryNewsMain> GetLastNewsByCategoryIdAsync(int quentity, int categoryId)
+        public async Task<CategoryNewSection> GetLastNewsByCategoryIdAsync(int quentity, int categoryId)
         {
             var cateoryIds = _categoryService.FindCategoryChildsByParentId(categoryId);
             
@@ -35,16 +35,16 @@ namespace BusinessLogicLayer.Services
                 .Take(quentity)
                 .ToListAsync();
 
-            var categoryNewsSetction = new CategoryNewsMain
+            var categoryNewsSetction = new CategoryNewSection
             {
-                CategoryNewsViewModels = new List<CategoryNewsViewModel>(),
+                NewsViewModels = new List<NewsViewModel>(),
                 CategoryId = categoryId,
                 CategoryTitle = _categoryService.Get(categoryId).Title
             };
 
             foreach (var newsCategory in newsCategories)
             {
-                var categoryNews = new CategoryNewsViewModel()
+                var categoryNews = new NewsViewModel()
                 {
                     NewsTitle = newsCategory.News.Title,
                     NewsHeadLine = newsCategory.News.Headline,
@@ -57,11 +57,53 @@ namespace BusinessLogicLayer.Services
                     AuthorId = newsCategory.News.AuthorId
                 };
 
-                categoryNewsSetction.CategoryNewsViewModels.Add(categoryNews);
+                categoryNewsSetction.NewsViewModels.Add(categoryNews);
             }
 
             return categoryNewsSetction;
 
         }
+
+        public async Task<CategoryNewSection> GetLastNewsAsync(int quentity)
+        {
+            var cateoryIds = _categoryService.FindCategoryChildsByParentId(categoryId);
+
+            var newsCategories = await _newsCategoryService.FindBy(newsCategory => cateoryIds.Any(catIds => catIds == newsCategory.CategoryId))
+                .Include(newsCategory => newsCategory.Category)
+                .Include(newsCategory => newsCategory.News)
+                .ThenInclude(news => news.Author)
+                .OrderByDescending(newsCategory => newsCategory.CreatedOn)
+                .Take(quentity)
+                .ToListAsync();
+
+            var categoryNewsSetction = new CategoryNewSection
+            {
+                NewsViewModels = new List<NewsViewModel>(),
+                CategoryId = categoryId,
+                CategoryTitle = _categoryService.Get(categoryId).Title
+            };
+
+            foreach (var newsCategory in newsCategories)
+            {
+                var categoryNews = new NewsViewModel()
+                {
+                    NewsTitle = newsCategory.News.Title,
+                    NewsHeadLine = newsCategory.News.Headline,
+                    ImageUrl = newsCategory.News.ImageUrl,
+                    CategoryTitle = newsCategory.Category.Title,
+                    CategoryId = newsCategory.Category.Id,
+                    NewsId = newsCategory.NewsId,
+                    CreatedOn = newsCategory.News.CreatedOn,
+                    Author = newsCategory.News.Author.FullName,
+                    AuthorId = newsCategory.News.AuthorId
+                };
+
+                categoryNewsSetction.NewsViewModels.Add(categoryNews);
+            }
+
+            return categoryNewsSetction;
+
+        }
+
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.ViewModels.News
 {
-    public class CategoryNewsViewModel
+    public class NewsViewModel
     {
         public int NewsId { get; set; }
         public string NewsTitle { get; set; }

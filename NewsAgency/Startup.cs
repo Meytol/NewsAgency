@@ -33,8 +33,8 @@ namespace NewsAgency
 
             services.AddMvc().AddRazorRuntimeCompilation();
 
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("NewsAgencyDbConnection")));
+            services.AddDbContext<DatabaseContext>(optionsAction: options =>
+                options.UseSqlServer(connectionString: Configuration.GetConnectionString(name: "NewsAgencyDbConnection")));
 
             #region IOC
 
@@ -65,7 +65,7 @@ namespace NewsAgency
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(errorHandlingPath: "/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -83,7 +83,7 @@ namespace NewsAgency
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(configure: endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",

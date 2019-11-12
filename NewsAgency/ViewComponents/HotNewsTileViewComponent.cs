@@ -19,7 +19,7 @@ namespace NewsAgency.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _hotNewsService.GetLastHotNewsTileAsync());
+            return View(model: await _hotNewsService.GetLastHotNewsTileAsync());
         }
     }
 }
