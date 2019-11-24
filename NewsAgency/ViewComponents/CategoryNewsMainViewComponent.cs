@@ -17,6 +17,7 @@ namespace NewsAgency.ViewComponents
             _newsService = newsService;
         }
 
+        //[ResponseCache(Duration = 600, Location = ResponseCacheLocation.Any, NoStore = false)]
         public async Task<IViewComponentResult> InvokeAsync(int categoryId, int quentity = 5)
         {
             return View(model: await _newsService.GetLastNewsByCategoryIdAsync(quentity: quentity, categoryId: categoryId));

@@ -17,6 +17,8 @@ namespace BusinessLogicLayer.Services
 
         public List<int> FindCategoryChildsByParentId(int parentId)
         {
+            var categories = GetAll();
+
             var categoriesIds = new List<int>
             {
                 parentId
@@ -24,7 +26,10 @@ namespace BusinessLogicLayer.Services
 
             foreach (var categoriesId in categoriesIds)
             {
-                categoriesIds.AddRange(FindBy(category => category.ParentId == categoriesId).Select(category => category.Id).ToList());
+                if (categories.Any(c => c.ParentId == categoriesId))
+                {
+                    categoriesIds.AddRange(categories.Where(category => category.ParentId == categoriesId).Select(category => category.Id).ToList());
+                }
             }
 
             return categoriesIds;

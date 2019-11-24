@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = " تماس با ما";
+    Layout = "_Layout";
+}
+
+<section class="block-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                <h3>تماس با ما</h3>
+                <p>
+                    امتیاز سایت 
+                    <span>
+                        «
+                        <a href="@Url.Action("Index", "Home")">
+                            اخبار موثق
+                        </a>
+                        »
+                    </span>
+                    به سرکار خانم مرضیه بلبل‌وند تعلق دارد و هرگونه دخل و تصرف در آن پیگرد قانونی دارد 
+                </p>
+
+                <div class="widget contact-info">
+
+                    <div class="contact-info-box">
+                        <div class="contact-info-box-content">
+                            <h4>آدرس ما</h4>
+                            <p>
+                                تهران، حکیمیه، بلوار بهار، دانشگاه آزاد اسلامی واحد تهران شمال
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-box">
+                        <div class="contact-info-box-content">
+                            <h4>به ما ایمیل بزنید</h4>
+                            <p>
+                                <a href="mailto:info@meytol.ir">
+                                    info[at]meytol[dot]ir
+                                </a>  
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-box">
+                        <div class="contact-info-box-content">
+                            <h4>با ما تماس بگیرید</h4>
+                            <p>
+                                <span class="ltr_text">
+                                    <a href="tel:+989386114201">0938-611-4201</a>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div><!-- Widget end -->
+
+            </div><!-- Content Col end -->
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    
+                    <partial name="_SocialBox"/><!-- Widget Social end -->
+
+                    <partial name="_Newsletters" /><!-- Newsletter widget end -->
+
+                </div><!-- Sidebar right end -->
+            </div><!-- Sidebar Col end -->
+
+        </div><!-- Row end -->
+    </div><!-- Container end -->
+</section><!-- First block end -->

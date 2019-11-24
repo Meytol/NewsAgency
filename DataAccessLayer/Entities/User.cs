@@ -25,7 +25,7 @@ namespace DataAccessLayer.Entities
         [Required]
         public string LastName { get; set; }
         [NotMapped]
-        public string FullName => FirstName + LastName;
+        public string FullName => FirstName + " " + LastName;
 
         public bool IsActive { get; set; } = true;
 

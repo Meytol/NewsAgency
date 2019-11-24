@@ -34,7 +34,8 @@ namespace NewsAgency
             services.AddMvc().AddRazorRuntimeCompilation();
 
             services.AddDbContext<DatabaseContext>(optionsAction: options =>
-                options.UseSqlServer(connectionString: Configuration.GetConnectionString(name: "NewsAgencyDbConnection")));
+                options.UseSqlServer(
+                    connectionString: Configuration.GetConnectionString(name: "NewsAgencyDbConnection")));
 
             #region IOC
 
@@ -48,6 +49,7 @@ namespace NewsAgency
             services.AddTransient<INewsCategoryService, NewsCategoryService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IRoleActionService, RoleActionService>();
             services.AddTransient<ISubscriberService, SubscriberService>();
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<IUserService, UserService>();
@@ -88,6 +90,13 @@ namespace NewsAgency
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseEndpoints(configure: endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

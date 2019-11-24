@@ -1,0 +1,57 @@
+﻿    @model BusinessLogicLayer.ViewModels.News.LastNewsSection
+
+<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    <div class="more-news block color-default">
+        <h3 class="block-title"><span>خبرهای بیشتر</span></h3>
+
+        <div id="more-news-slide" class="owl-carousel owl-theme more-news-slide">
+
+            @{
+                var s = 0;
+                for (int i = 0; i <= Model.NewsViewModels.Count() / 4; i++)
+                {
+                    <div class="item">
+
+                        @foreach (var news in Model.NewsViewModels.Skip(s).Take(4))
+                        {
+
+                            <div class="post-block-style post-float-half clearfix">
+                                <div class="post-thumb">
+                                    <a href="@Url.Action(nameof(Index), "News", new {@id = @news.NewsId})">
+                                        <img class="img-responsive" src="@news.ImageUrl" alt="@news.NewsTitle">
+                                    </a>
+                                </div>
+                                <a class="post-cat" href="@Url.Action(nameof(Index), "Category", new {@id = news.CategoryId})">
+                                    @news.CategoryTitle
+                                </a>
+                                <div class="post-content">
+                                    <h2 class="post-title">
+                                        <a href="@Url.Action(nameof(Index), "News", new {@id = news.NewsId})">
+                                            @news.NewsTitle
+                                        </a>
+                                    </h2>
+                                    <div class="post-meta">
+                                        <span class="post-author">
+                                            <a href="@Url.Action(nameof(Index), "Author", new {@id = news.AuthorId})">
+                                                @news.Author
+                                            </a>
+                                        </span>
+                                        <span class="post-date">
+                                            @news.CreatedOn.ToLongDateString()
+                                        </span>
+                                    </div>
+                                    <p>
+                                        @news.NewsHeadLine
+                                    </p>
+                                </div><!-- Post content end -->
+                            </div><!-- Post Block style 1 end -->
+                            <div class="gap-30"></div>
+                            s++;
+                        }
+
+                    </div><!-- Item 1 end -->
+                }
+            }
+        </div><!-- More news carousel end -->
+    </div><!--More news block end -->
+</div><!-- Content Col end -->

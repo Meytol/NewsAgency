@@ -17,9 +17,9 @@ namespace NewsAgency.ViewComponents
             _newsService = newsService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int categoryId)
+        public async Task<IViewComponentResult> InvokeAsync(int quentity = 8)
         {
-            return View(model: await _newsService.GetLastNewsAsync(quentity: 4));
+            return View(model: await _newsService.GetLastNewsAsync(quentity: quentity));
         }
     }
 }

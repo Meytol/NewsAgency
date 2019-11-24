@@ -23,7 +23,7 @@ namespace NewsAgency.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ContactUs()
         {
             return View();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Common.Enums.Models;
 using Common.Interfaces.Models;
@@ -13,7 +14,7 @@ namespace DataAccessLayer.Repository
     public class GenericRepository<T> : IGenericRepository<T> where T : class, IAuditable
     {
         protected DatabaseContext Context;
-        private bool disposed = false;
+        private bool _disposed = false;
 
         public GenericRepository(DatabaseContext context)
         {
@@ -214,7 +215,7 @@ namespace DataAccessLayer.Repository
 
             return queryable;
         }
-
+        
         /// <summary>
         /// Count objects quentity even those's that ViewState set to Deleted
         /// </summary>
@@ -325,7 +326,7 @@ namespace DataAccessLayer.Repository
         {
             var t = Context.Set<T>().FirstOrDefault(match);
 
-            return t.ViewState == ViewState.Available.GetHashCode() ? t : null;
+            return t?.ViewState == ViewState.Available.GetHashCode() ? t : null;
         }
 
         /// <summary>
@@ -425,9 +426,9 @@ namespace DataAccessLayer.Repository
         /// </returns>
         public int Count()
         {
-            return Context.Set<T>()
-                .Where(t => t.ViewState == ViewState.Available.GetHashCode())
-                .Count();
+            return Context
+                .Set<T>()
+                .Count(t => t.ViewState == ViewState.Available.GetHashCode());
         }
 
         /// <summary>
@@ -681,13 +682,13 @@ namespace DataAccessLayer.Repository
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
                     Context.Dispose();
                 }
-                this.disposed = true;
+                this._disposed = true;
             }
         }
 

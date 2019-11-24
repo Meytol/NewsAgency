@@ -1,73 +1,71 @@
 ﻿@model BusinessLogicLayer.ViewModels.News.CategoryNewSection
 
-<section class="block-wrapper p-top-0">
-    <div class="container">
-        <div class="row">
+<div class="col-md-4">
+    <div class="block color-dark-blue">
+        <h3 class="block-title">
+            <span>
+                @Model.CategoryTitle
+            </span>
+        </h3>
+    @{
+        var firstModel = Model.NewsViewModels.FirstOrDefault();
+   
+        <div class="post-overaly-style clearfix">
+            <div class="post-thumb">
+                <a href="@Url.Action(action: nameof(Index),controller: "Category",values: new { @id=@Model.CategoryId })">
+                    <img class="img-responsive" src="@firstModel.ImageUrl" alt="@Model.CategoryTitle">
+                </a>
+            </div>
 
-            <div class="col-md-4">
-                <div class="block color-dark-blue">
-                    <h3 class="block-title"><span>@Model.CategoryTitle</span></h3>
-                    <div class="post-overaly-style clearfix">
-                        <div class="post-thumb">
-                            <a href="@Url.Action(action: nameof(Index),controller: "Category",values: new { @id=@Model.CategoryId })">
-                                <img class="img-responsive" src="/images/news/lifestyle/travel1.jpg" alt="@Model.CategoryTitle">
-                            </a>
-                        </div>
+            <div class="post-content">
+                @{
 
-                        <div class="post-content">
-                            @{
-                                var firstModel = Model.NewsViewModels.FirstOrDefault();
-
-
-                            <h2 class="post-title">
-                                <a href="@Url.Action(action: nameof(Index), controller: "News", values: new {@id = @firstModel.NewsId})">
-                                    @firstModel.NewsTitle
-                                </a>
-                            </h2>
-                            <div class="post-meta">
-                                <span class="post-date">@firstModel.CreatedOn.ToLongDateString()</span>
-                            </div>
-                            }
-                        </div><!-- Post content end -->
-                    </div><!-- Post Overaly Article end -->
-
-                    <div class="list-post-block">
-                        <ul class="list-post">
+                    <h2 class="post-title">
+                        <a href="@Url.Action(action: nameof(Index), controller: "News", values: new {@id = @firstModel.NewsId})">
+                            @firstModel.NewsTitle
+                        </a>
+                    </h2>
+                    <div class="post-meta">
+                        <span class="post-date">@firstModel.CreatedOn.ToLongDateString()</span>
+                    </div>
+                }
+            </div><!-- Post content end -->
+        </div><!-- Post Overaly Article end -->
+    }
+        <div class="list-post-block">
+            <ul class="list-post">
                             
-                            @{
-                                for (int i = 1; i < @Model.NewsViewModels.Count(); i++)
-                                {
-                                    var item = @Model.NewsViewModels.ElementAt(index: i);
+                @{
+                    for (int i = 1; i < @Model.NewsViewModels.Count(); i++)
+                    {
+                        var item = @Model.NewsViewModels.ElementAt(index: i);
 
-                                    <li class="clearfix">
-                                        <div class="post-block-style post-float clearfix">
-                                            <div class="post-thumb">
-                                                <a href="@Url.Action(action: nameof(Index),controller: "News",values: new { @id=item.NewsId })">
-                                                    <img class="img-responsive" src="@item.ImageUrl" alt="@item.NewsTitle">
-                                                </a>
-                                            </div><!-- Post thumb end -->
+                        <li class="clearfix">
+                            <div class="post-block-style post-float clearfix">
+                                <div class="post-thumb">
+                                    <a href="@Url.Action(action: nameof(Index),controller: "News",values: new { @id=item.NewsId })">
+                                        <img class="img-responsive" src="@item.ImageUrl" alt="@item.NewsTitle">
+                                    </a>
+                                </div><!-- Post thumb end -->
 
-                                            <div class="post-content">
-                                                <h2 class="post-title title-small">
-                                                    <a href="@Url.Action(action: nameof(Index),controller: "News",values: new { @id=item.NewsId })">
-                                                        @item.NewsTitle
-                                                    </a>
-                                                </h2>
-                                                <div class="post-meta">
-                                                    <span class="post-date">@item.CreatedOn.ToLongDateString()</span>
-                                                </div>
-                                            </div><!-- Post content end -->
-                                        </div><!-- Post block style end -->
-                                    </li>
-                                }
-                            }
+                                <div class="post-content">
+                                    <h2 class="post-title title-small">
+                                        <a href="@Url.Action(action: nameof(Index),controller: "News",values: new { @id=item.NewsId })">
+                                            @item.NewsTitle
+                                        </a>
+                                    </h2>
+                                    <div class="post-meta">
+                                        <span class="post-date">@item.CreatedOn.ToLongDateString()</span>
+                                    </div>
+                                </div><!-- Post content end -->
+                            </div><!-- Post block style end -->
+                        </li>
+                    }
+                }
 
-                            <!-- Li News end -->
+                <!-- Li News end -->
 
-                        </ul><!-- List post end -->
-                    </div><!-- List post block end -->
-                </div><!-- Block end -->
-            </div><!-- Category News Col end -->
-        </div><!-- Row end -->
-    </div><!-- Container end -->
-</section>
+            </ul><!-- List post end -->
+        </div><!-- List post block end -->
+    </div><!-- Block end -->
+</div><!-- Category News Col end -->

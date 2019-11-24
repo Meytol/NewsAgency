@@ -7,37 +7,41 @@
                         <div class="footer-logo">
                             <img class="img-responsive" src="images/logos/footer-logo.png" alt="">
                         </div>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی</p>
-                        <p class="footer-info-phone"><i class="fa fa-phone"></i> <span class="ltr_text">+(785) 238-4131</span></p>
-                        <p class="footer-info-email"><i class="fa fa-envelope-o"></i> <span class="ltr_text">info@example.com</span></p>
+                        <p>
+                        خبرگزاری اخبار موثق، خبرگزاری ای کاملا مردمی است!
+                            </p>
+                        <p class="footer-info-phone">
+                            <i class="fas fa-phone"></i>
+                            <span class="ltr_text">
+                                <a href="tel:+989386114201">
+                                    0938-611-4201
+                                </a>
+                            </span>
+                        </p>
+                        <p class="footer-info-email">
+                            <i class="fas fa-envelope"></i>
+                            <span class="ltr_text">
+                                <a href="mailto:info@meytol.ir" style="text-decoration: none;">
+                                    info[at]meytol[dot]ir
+                                </a>
+                            </span>
+                        </p>
                         <ul class="unstyled footer-social">
                             <li>
                                 <a title="Rss" href="#">
-                                    <span class="social-icon"><i class="fa fa-rss"></i></span>
+                                    <span class="social-icon"><i class="fas fa-rss fa-2x"></i></span>
                                 </a>
                                 <a title="Facebook" href="#">
-                                    <span class="social-icon"><i class="fa fa-facebook"></i></span>
+                                    <span class="social-icon"><i class="fab fa-facebook-square fa-2x"></i></span>
                                 </a>
                                 <a title="Twitter" href="#">
-                                    <span class="social-icon"><i class="fa fa-twitter"></i></span>
+                                    <span class="social-icon"><i class="fab fa-twitter fa-2x"></i></span>
                                 </a>
-                                <a title="Google+" href="#">
-                                    <span class="social-icon"><i class="fa fa-google-plus"></i></span>
+                                <a title="Telegram" href="#">
+                                    <span class="social-icon"><i class="fab fa-telegram-plane fa-2x"></i></span>
                                 </a>
-                                <a title="Linkdin" href="#">
-                                    <span class="social-icon"><i class="fa fa-linkedin"></i></span>
-                                </a>
-                                <a title="Skype" href="#">
-                                    <span class="social-icon"><i class="fa fa-skype"></i></span>
-                                </a>
-                                <a title="Skype" href="#">
-                                    <span class="social-icon"><i class="fa fa-dribbble"></i></span>
-                                </a>
-                                <a title="Skype" href="#">
-                                    <span class="social-icon"><i class="fa fa-pinterest"></i></span>
-                                </a>
-                                <a title="Skype" href="#">
-                                    <span class="social-icon"><i class="fa fa-instagram"></i></span>
+                                <a title="Instagram" href="#">
+                                    <span class="social-icon"><i class="fab fa-instagram fa-2x"></i></span>
                                 </a>
                             </li>
                         </ul>
@@ -54,18 +58,15 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6">
                 <div class="copyright-info">
-                    <span>تمامی حقوق برای این وب سایت محفوظ است</span>
+                    <span>تمامی حقوق برای «اخبار موثق» محفوظ است.</span>
+                    <span>2018 - @DateTime.Now.Year ©</span>
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-6">
                 <div class="footer-menu">
                     <ul class="nav unstyled">
-                        <li><a href="#">قوانین سایت</a></li>
-                        <li><a href="#">حریم شخصی</a></li>
-                        <li><a href="#">تبلیغات</a></li>
-                        <li><a href="#">قوانین کوکی ها</a></li>
-                        <li><a href="#">تماس با ما</a></li>
+                        <li><a href="@Url.Action("ContactUs","Home")">تماس با ما</a></li>
                     </ul>
                 </div>
             </div>
