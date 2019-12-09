@@ -1,0 +1,106 @@
+﻿@model BusinessLogicLayer.ViewModels.News.NewsPaginationSection
+
+<div class="block category-listing">
+
+    <div class="row">
+
+        @{
+            foreach (var news in @Model.NewsViewModels)
+            {
+                <div class="col-md-6 col-sm-6">
+                    <div class="post-block-style post-grid clearfix">
+                        <div class="post-thumb">
+                            <a href="@Url.Action("Index","News",new{@news.NewsId})">
+                                <img class="img-responsive" src="@news.ImageUrl" alt="@news.NewsTitle" style="width: 350px;height: 200px">
+                            </a>
+                        </div>
+                        <a class="post-cat" href="@Url.Action("Index", "Category", new {@id = @news.CategoryId})">
+                            @news.CategoryTitle
+                        </a>
+                        <div class="post-content">
+                            <h2 class="post-title title-large">
+                                <a href="@Url.Action("Index","News",new{@news.NewsId})">
+                                    @news.NewsTitle
+                                </a>
+                            </h2>
+                            <div class="post-meta">
+                                <span class="post-author">
+                                    <a href="@Url.Action("Index","Author",new{@news.AuthorId})">
+                                        @news.AuthorFullName
+                                    </a>
+                                </span>
+                                <span class="post-date">
+                                    @news.CreatedOn.ToLongDateString()
+                                </span>
+                                <span class="post-comment pull-right">
+                                    0
+                                    <i class="fa fa-comments-alt"></i>
+                                </span>
+                            </div>
+                            <p>
+                                @news.NewsHeadLine
+                            </p>
+                        </div><!-- Post content end -->
+                    </div><!-- Post Block style end -->
+                </div><!-- Col 1 end -->
+
+            }
+        }
+
+    </div><!-- Row end -->
+</div><!-- Block Lifestyle end -->
+
+<div class="paging">
+    <ul class="pagination">
+
+        @{
+            if (@Model.CurrentPageNumber - 1 > 0)
+            {
+                <li>
+                    <a class="btn" onclick="ChangePage(@Model.CurrentPageNumber - 1)">
+                        <i class="fa fa-angle-double-left"></i>
+                        قبلی
+                    </a>
+                </li>
+            }
+
+            @if (@Model.NumberOfPages > 1)
+            {
+                for (int i = 1; i <= @Model.NumberOfPages; i++)
+                {
+                    if (@Model.CurrentPageNumber == i)
+                    {
+                        <li class="active"><a class="btn" onclick="ChangePage(@i)">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a class="btn" onclick="ChangePage(@i)">@i</a></li>
+                    }
+                }
+            }
+
+
+
+            if (@Model.CurrentPageNumber + 1 <= @Model.NumberOfPages)
+            {
+                <li>
+                    <a class="btn" onclick="ChangePage(@Model.CurrentPageNumber + 1)">
+                        بعدی
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+
+            <li>
+                <span class="page-numbers">
+                    صفحه
+                    @Model.CurrentPageNumber
+                    از
+                    @Model.NumberOfPages
+                </span>
+            </li>
+
+        }
+
+    </ul>
+</div><!-- Paging end -->

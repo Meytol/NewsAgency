@@ -12,6 +12,8 @@ namespace BusinessLogicLayer.ViewModels.News
         public int CategoryId { get; set; }
         public DateTime CreatedOn { get; set; }
         public int AuthorId { get; set; }
-        public string Author { get; set; }
+        public string AuthorFullName { get; set; }
+        public int SeenCount { get; set; }
+        public string NewsText { get; set; }
     }
 }

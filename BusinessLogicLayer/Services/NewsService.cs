@@ -35,10 +35,10 @@ namespace BusinessLogicLayer.Services
             return base.AddAsync(entity, createdById);
         }
 
-        public async Task<CategoryNewSection> GetLastNewsByCategoryIdAsync(int quentity, int categoryId)
+        public async Task<NewsPaginationSection> GetLastNewsByCategoryIdAsync(int quentity, int categoryId, int page = 1)
         {
             var cateoryIds = _categoryService.FindCategoryChildsByParentId(categoryId);
-            
+
             var newsCategories = await _newsCategoryService
                 .FindBy(newsCategory => cateoryIds
                     .Any(catIds => catIds == newsCategory.CategoryId))
@@ -46,14 +46,26 @@ namespace BusinessLogicLayer.Services
                 .Include(newsCategory => newsCategory.News)
                     .ThenInclude(news => news.Author)
                 .OrderByDescending(newsCategory => newsCategory.CreatedOn)
+                .Skip((page - 1) * quentity)
                 .Take(quentity)
                 .ToListAsync();
 
-            var categoryNewsSetction = new CategoryNewSection
+            var wholeNewsesQuentity = await _newsCategoryService
+                .FindBy(newsCategory => cateoryIds
+                    .Any(catIds => catIds == newsCategory.CategoryId)).CountAsync();
+
+            var numOfPages = (wholeNewsesQuentity / quentity);
+
+            if (newsCategories.Count() % quentity != 0)
+                numOfPages++;
+
+            var categoryNewsSetction = new NewsPaginationSection
             {
                 NewsViewModels = new List<NewsViewModel>(),
-                CategoryId = categoryId,
-                CategoryTitle = _categoryService.Get(categoryId).Title
+                MainCategoryId = categoryId,
+                MainCategoryTitle = _categoryService.Get(categoryId).Title,
+                NumberOfPages = numOfPages,
+                CurrentPageNumber = page 
             };
 
             foreach (var newsCategory in newsCategories)
@@ -67,7 +79,7 @@ namespace BusinessLogicLayer.Services
                     CategoryId = newsCategory.Category.Id,
                     NewsId = newsCategory.NewsId,
                     CreatedOn = newsCategory.News.CreatedOn,
-                    Author = newsCategory.News.Author.FullName,
+                    AuthorFullName = newsCategory.News.Author.FullName,
                     AuthorId = newsCategory.News.AuthorId
                 };
 
@@ -77,7 +89,7 @@ namespace BusinessLogicLayer.Services
             return categoryNewsSetction;
         }
 
-        public async Task<LastNewsSection> GetLastNewsAsync(int quentity)
+        public async Task<OtherNewsSection> GetLastNewsAsync(int quentity)
         {
 
             var lastNewses = await GetAll()
@@ -88,7 +100,7 @@ namespace BusinessLogicLayer.Services
                 .Take(quentity)
                 .ToListAsync();
 
-            var categoryNewsSetction = new LastNewsSection
+            var categoryNewsSetction = new OtherNewsSection
             {
                 NewsViewModels = new List<NewsViewModel>(),
             };
@@ -104,7 +116,7 @@ namespace BusinessLogicLayer.Services
                     CategoryId = news.Id,
                     NewsId = news.Id,
                     CreatedOn = news.CreatedOn,
-                    Author = news.Author.FullName,
+                    AuthorFullName = news.Author.FullName,
                     AuthorId = news.AuthorId
                 };
                 categoryNewsSetction.NewsViewModels.Add(lastNews);
@@ -113,15 +125,77 @@ namespace BusinessLogicLayer.Services
             return categoryNewsSetction;
         }
 
-        public News GetNewsFull(int id)
+        public NewsViewModel GetNewsFull(int id)
         {
             var news = GetAll()
+                .Include(n => n.NewsSeens)
                 .Include(n => n.Author)
                 .Include(n => n.NewsCategories)
                 .ThenInclude(nc => nc.Category)
                 .FirstOrDefault(n => n.Id == id);
 
-            return news;
+            var newsViewModel = new NewsViewModel()
+            {
+                AuthorId = news.AuthorId,
+                NewsTitle = news.Title,
+                CategoryId = news.NewsCategories.FirstOrDefault(nc => nc.IsMain).CategoryId,
+                ImageUrl = news.ImageUrl,
+                CreatedOn = news.CreatedOn,
+                CategoryTitle = news.NewsCategories.FirstOrDefault(nc => nc.IsMain).Category.Title,
+                NewsId = news.Id,
+                NewsHeadLine = news.Headline,
+                SeenCount = news.NewsSeens.Count(),
+                AuthorFullName = news.Author.FullName,
+                NewsText = news.Text
+            };
+
+            return newsViewModel;
+        }
+
+        public async Task<NewsPaginationSection> GetLastNewsByAuthorIdAsync(int quentity, int authorId, int page = 1)
+        {
+            var authorNewses = await FindBy(news => news.AuthorId == authorId)
+                .Include(news => news.Author)
+                .Include(news => news.NewsCategories)
+                .ThenInclude(newsCategory => newsCategory.Category)
+                .OrderByDescending(newsCategory => newsCategory.CreatedOn)
+                .Skip((page - 1) * quentity)
+                .Take(quentity)
+                .ToListAsync();
+
+            var wholeNewsesQuentity = await FindBy(news => news.AuthorId == authorId).CountAsync();
+
+            var numOfPages = (wholeNewsesQuentity / quentity);
+
+            if (authorNewses.Count() % quentity > 0)
+                numOfPages++;
+
+            var authorNewsSetction = new NewsPaginationSection
+            {
+                NewsViewModels = new List<NewsViewModel>(),
+                CurrentPageNumber = page,
+                NumberOfPages = numOfPages
+            };
+
+            foreach (var authorNews in authorNewses)
+            {
+                var news = new NewsViewModel
+                {
+                    NewsTitle = authorNews.Title,
+                    NewsHeadLine = authorNews.Headline,
+                    ImageUrl = authorNews.ImageUrl,
+                    CategoryTitle = authorNews.NewsCategories.FirstOrDefault(nc => nc.IsMain).Category.Title,
+                    CategoryId = authorNews.NewsCategories.FirstOrDefault(nc => nc.IsMain).Category.Id,
+                    NewsId = authorNews.Id,
+                    CreatedOn = authorNews.CreatedOn,
+                    AuthorFullName = authorNews.Author.FullName,
+                    AuthorId = authorNews.AuthorId,
+                };
+
+                authorNewsSetction.NewsViewModels.Add(news);
+            }
+
+            return authorNewsSetction;
         }
     }
 }

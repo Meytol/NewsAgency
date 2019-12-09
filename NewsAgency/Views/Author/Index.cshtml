@@ -1,0 +1,100 @@
+﻿@model BusinessLogicLayer.ViewModels.Author.AuthorPageViewModel
+
+
+@{
+    ViewData["Title"] = "نویسندگان - " + @Model.Author.FullName;
+}
+
+<section class="block-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                <div class="author-box">
+                    <div class="author-img pull-left">
+                        <img src="@Model.Author.ProfilePictureUrl" alt="@Model.Author.FullName">
+                    </div>
+                    <div class="author-info">
+                        <h3>@Model.Author.FullName</h3>
+                        <div class="author-counter pull-right">
+                            <span>
+                                @Model.NewsCount
+                                مطلب
+                            </span>
+                            <span>
+                                @Model.CommentCount
+                                دیدگاه
+                            </span>
+                        </div>
+                        <p class="author-url">
+                            تاریخ عضویت:
+                            @Model.Author.CreatedOn.ToLongDateString()
+                        </p>
+                        <p>
+                            @Model.Author.Biography
+                        </p>
+                        <div class="authors-social">
+                            <span>مرا دنبال کنید: </span>
+                            @{
+                                if (!string.IsNullOrWhiteSpace(@Model.Author.FacebookUrl))
+                                {
+                                    <a href="@Model.Author.FacebookUrl"><i class="fab fa-facebook-f"></i></a>
+                                }
+                                if (!string.IsNullOrWhiteSpace(@Model.Author.TwitterUrl))
+                                {
+                                    <a href="@Model.Author.TwitterUrl"><i class="fab fa-twitter"></i></a>
+                                }
+                                if (!string.IsNullOrWhiteSpace(@Model.Author.TelegramUrl))
+                                {
+                                    <a href="@Model.Author.TelegramUrl">
+                                        <i class="fab fa-telegram-plane"></i>
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div> <!-- Author box end -->
+
+                <div id="AuthorNewsPage"></div>
+                
+            </div><!-- Content Col end -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <partial name="_SocialBox" />
+                <br/>
+                <partial name="_Newsletters"/>
+            </div>
+        </div><!-- Row end -->
+    </div><!-- Container end -->
+</section><!-- First block end -->
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            GetNewses(@ViewBag.AuthorId, 1);
+        });
+
+        function ChangePage(pageNum) {
+            GetNewses(@ViewBag.AuthorId, pageNum);
+        }
+
+        function GetNewses(authorId, page) {
+
+            $.ajax({
+                url: "@Url.Action("GetNewsByAuthorId","Author")",
+                type: "GET",
+                data: {
+                    authorId: authorId,
+                    quentity: 8,
+                    page: page
+                },
+                async: false,
+                success: function (result) {
+                    $("#AuthorNewsPage").html("");
+                    $("#AuthorNewsPage").html(result);
+                }
+            });
+        }
+
+    </script>
+}

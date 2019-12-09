@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicLayer.IServices;
 using DataAccessLayer.Database;
@@ -17,20 +18,15 @@ namespace BusinessLogicLayer.Services
 
         public List<int> FindCategoryChildsByParentId(int parentId)
         {
-            var categories = GetAll();
+            var allCategories = GetAll();
 
             var categoriesIds = new List<int>
             {
                 parentId
             };
 
-            foreach (var categoriesId in categoriesIds)
-            {
-                if (categories.Any(c => c.ParentId == categoriesId))
-                {
-                    categoriesIds.AddRange(categories.Where(category => category.ParentId == categoriesId).Select(category => category.Id).ToList());
-                }
-            }
+            categoriesIds.AddRange(allCategories.Where(category => category.ParentId == parentId)
+                .Select(category => category.Id).ToList());
 
             return categoriesIds;
         }

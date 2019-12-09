@@ -8,10 +8,12 @@ namespace DataAccessLayer.Database
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
         }
 
         #region DbSet
@@ -24,6 +26,7 @@ namespace DataAccessLayer.Database
         public DbSet<Link> Links { get; set; }
         public DbSet<News> Newses { get; set; }
         public DbSet<NewsCategory> NewsCategories { get; set; }
+        public DbSet<NewsSeen> NewsSeens { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RoleAction> RoleActions { get; set; }
         public DbSet<Setting> Settings { get; set; }

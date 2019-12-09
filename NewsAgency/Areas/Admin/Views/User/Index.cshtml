@@ -4,8 +4,16 @@
     ViewData["Title"] = "Index";
     Layout = "_AdminLayout";
 }
+<section class="content-header">
+    <h1>
+        کاربران
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">داشبرد</li>
+    </ol>
+</section>
 
-<h2>Index</h2>
 
 <p>
     <a href="@Url.Action("Create","User",new {@Area = "Admin"})">Create New</a>

@@ -1,4 +1,4 @@
-﻿    @model BusinessLogicLayer.ViewModels.News.LastNewsSection
+﻿    @model BusinessLogicLayer.ViewModels.News.OtherNewsSection
 
 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
     <div class="more-news block color-default">
@@ -33,7 +33,7 @@
                                     <div class="post-meta">
                                         <span class="post-author">
                                             <a href="@Url.Action(nameof(Index), "Author", new {@id = news.AuthorId})">
-                                                @news.Author
+                                                @news.AuthorFullName
                                             </a>
                                         </span>
                                         <span class="post-date">

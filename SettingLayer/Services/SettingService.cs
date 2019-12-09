@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Database;
+using DataAccessLayer.Entities;
 using SettingLayer.IServices;
 using SettingLayer.ViewModels;
 
@@ -15,12 +16,27 @@ namespace SettingLayer.Services
 
         public SettingVM Get(string key)
         {
-            _context.
+            var value = _context.Settings.Find(key).Value;
+
+            var settingVM = new SettingVM()
+            {
+                Key = key,
+                Value = value
+            };
+
+            return settingVM;
+
         }
 
-        public void Set(string key)
+        public void Set(string key ,string value)
         {
-            throw new System.NotImplementedException();
+            var setting = new Setting
+            {
+                Key = key,
+                Value = value
+            };
+
+            _context.Add(setting);
         }
     }
 }

@@ -9,6 +9,7 @@ using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,8 @@ namespace NewsAgency
         {
             services.AddControllersWithViews();
 
-            services.AddMvc().AddRazorRuntimeCompilation();
+            services.AddMvc()
+                .AddRazorRuntimeCompilation();
 
             services.AddDbContext<DatabaseContext>(optionsAction: options =>
                 options.UseSqlServer(
@@ -88,15 +90,20 @@ namespace NewsAgency
             app.UseEndpoints(configure: endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
             });
 
             app.UseEndpoints(configure: endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

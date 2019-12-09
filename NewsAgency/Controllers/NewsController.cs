@@ -22,6 +22,9 @@ namespace NewsAgency.Controllers
             if (id == 0)
                 return RedirectToAction(nameof(Index),"Home");
 
+            if (!_newsService.Exists(id))
+                RedirectToAction("NotFound", "Error");
+
             var model = _newsService.GetNewsFull(id);
 
             return View(model);

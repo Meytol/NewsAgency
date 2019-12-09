@@ -9,8 +9,9 @@ namespace BusinessLogicLayer.IServices
 {
     public interface INewsService  : IGenericRepository<News>
     {
-        Task<CategoryNewSection> GetLastNewsByCategoryIdAsync(int quentity, int categoryId);
-        Task<LastNewsSection> GetLastNewsAsync(int quentity);
-        News GetNewsFull(int id);
+        Task<NewsPaginationSection> GetLastNewsByCategoryIdAsync(int quentity, int categoryId, int page = 1);
+        Task<OtherNewsSection> GetLastNewsAsync(int quentity);
+        NewsViewModel GetNewsFull(int id);
+        Task<NewsPaginationSection> GetLastNewsByAuthorIdAsync(int quentity, int authorId, int page = 1);
     }
 }

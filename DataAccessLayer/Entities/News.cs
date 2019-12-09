@@ -33,6 +33,7 @@ namespace DataAccessLayer.Entities
 
         public User Author { get; set; }
         public ICollection<NewsCategory> NewsCategories { get; set; }
+        public ICollection<NewsSeen> NewsSeens { get; set; }
 
         #endregion
 

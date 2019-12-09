@@ -1,10 +1,10 @@
-﻿@model BusinessLogicLayer.ViewModels.News.CategoryNewSection
+﻿@model BusinessLogicLayer.ViewModels.News.NewsPaginationSection
 
 <div class="col-md-4">
     <div class="block color-dark-blue">
         <h3 class="block-title">
             <span>
-                @Model.CategoryTitle
+                @Model.MainCategoryTitle
             </span>
         </h3>
     @{
@@ -12,8 +12,8 @@
    
         <div class="post-overaly-style clearfix">
             <div class="post-thumb">
-                <a href="@Url.Action(action: nameof(Index),controller: "Category",values: new { @id=@Model.CategoryId })">
-                    <img class="img-responsive" src="@firstModel.ImageUrl" alt="@Model.CategoryTitle">
+                <a href="@Url.Action(action: nameof(Index),controller: "Category",values: new { @id=@Model.MainCategoryId })">
+                    <img class="img-responsive" src="@firstModel.ImageUrl" alt="@Model.MainCategoryTitle">
                 </a>
             </div>
 

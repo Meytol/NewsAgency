@@ -1,4 +1,4 @@
-﻿@model DataAccessLayer.Entities.News
+﻿@model BusinessLogicLayer.ViewModels.News.NewsViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,24 +9,23 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <div class="single-post">
+                <div class="single-post" >
 
                     <div class="post-title-area">
                         @{
-                            var category = @Model.NewsCategories.FirstOrDefault(n => n.IsMain).Category;
-                            <a class="post-cat" href="@Url.Action(nameof(Index), "Category", new {@id = @category.Id})">
-                                @category.Title
+                            <a class="post-cat" href="@Url.Action(nameof(Index), "Category", new {@id = Model.CategoryId})">
+                                @Model.CategoryTitle
                             </a>
                         }
 
                         <h2 class="post-title">
-                            @Model.Title
+                            @Model.NewsTitle
                         </h2>
                         <div class="post-meta">
                             <span class="post-author">
                                 خبرنگار
-                                <a href="#">
-                                    @Model.Title
+                                <a href="@Url.Action("Index","Author",new {@Id = @Model.AuthorId})">
+                                    @Model.AuthorFullName
                                 </a>
                             </span>
                             <span class="post-date">
@@ -35,10 +34,10 @@
                             </span>
                             <span class="post-hits">
                                 <i class="fa fa-eye"></i>
-                                تعداد بازدید
+                                @Model.SeenCount
                             </span>
                             <span class="post-comment">
-                                <i class="fa fa-comments-o"></i>
+                                <i class="fa fa-comments-alt"></i>
                                 <a href="#" class="comments-link">
                                     <span>تعدا نظرات</span>
                                 </a>
@@ -48,142 +47,105 @@
 
                     <div class="post-content-area">
                         <div class="post-media post-featured-image">
-                            <img src="@Model.ImageUrl" class="img-responsive" alt="@Model.Title">
+                            <img src="@Model.ImageUrl" class="img-responsive" alt="@Model.NewsTitle">
                         </div>
                         <div class="entry-content">
                             <h4>
-                                @Model.Headline
+                                @Model.NewsHeadLine
                             </h4>
 
                             <p>
-                                @Model.Text
+                                @Model.NewsText
                             </p>
 
                         </div><!-- Entery content end -->
-
-                       
+                    اتمام خبر.
+                        <br/>
                     </div><!-- post-content end -->
                 </div><!-- Single post end -->
 
-                <nav class="post-navigation clearfix">
-                    <div class="post-previous">
-                        <a href="#">
-                            <span><i class="fa fa-angle-right"></i>مطلب قبلی</span>
-                            <h3>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                            </h3>
-                        </a>
-                    </div>
-                    <div class="post-next">
-                        <a href="#">
-                            <span>مطلب بعدی <i class="fa fa-angle-left"></i></span>
-                            <h3>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
-                            </h3>
-                        </a>
-                    </div>
-                </nav><!-- Post navigation end -->
+            <div class="related-posts block">
+                <h3 class="block-title"><span>مطالب مرتبط</span></h3>
 
-                <div class="author-box">
-                    <div class="author-img pull-left">
-                        <img src="images/news/author.png" alt="">
-                    </div>
-                    <div class="author-info">
-                        <h3>
-                            @Model.Author.FullName
-                        </h3>
-                        <p class="author-url"><a href="#">لورم ایپسوم متن ساختگی با تولید</a></p>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط</p>
-                        <div class="authors-social">
-                            <span>مرا دنبال کنید: </span>
-                            <a href="#"><i class="fa fa-behance"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                        </div>
-                    </div>
-                </div> <!-- Author box end -->
-
-                <div class="related-posts block">
-                    <h3 class="block-title"><span>مطالب مرتبط</span></h3>
-
-                    <div id="latest-news-slide" class="owl-carousel owl-theme latest-news-slide">
-                        <div class="item">
-                            <div class="post-block-style clearfix">
-                                <div class="post-thumb">
-                                    <a href="#"><img class="img-responsive" src="images/news/lifestyle/travel5.jpg" alt=""></a>
+                <div id="latest-news-slide" class="owl-carousel owl-theme latest-news-slide">
+                    <div class="item">
+                        <div class="post-block-style clearfix">
+                            <div class="post-thumb">
+                                <a href="#"><img class="img-responsive" src="images/news/lifestyle/travel5.jpg" alt=""></a>
+                            </div>
+                            <a class="post-cat" href="#">سلامتی</a>
+                            <div class="post-content">
+                                <h2 class="post-title title-medium">
+                                    <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با</a>
+                                </h2>
+                                <div class="post-meta">
+                                    <span class="post-author"><a href="#">جان اسنو</a></span>
+                                    <span class="post-date">30 فروردین 1396</span>
                                 </div>
-                                <a class="post-cat" href="#">سلامتی</a>
-                                <div class="post-content">
-                                    <h2 class="post-title title-medium">
-                                        <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با</a>
-                                    </h2>
-                                    <div class="post-meta">
-                                        <span class="post-author"><a href="#">جان اسنو</a></span>
-                                        <span class="post-date">30 فروردین 1396</span>
-                                    </div>
-                                </div><!-- Post content end -->
-                            </div><!-- Post Block style end -->
-                        </div><!-- Item 1 end -->
+                            </div><!-- Post content end -->
+                        </div><!-- Post Block style end -->
+                    </div><!-- Item 1 end -->
 
-                        <div class="item">
-                            <div class="post-block-style clearfix">
-                                <div class="post-thumb">
-                                    <a href="#"><img class="img-responsive" src="images/news/lifestyle/health5.jpg" alt=""></a>
+                    <div class="item">
+                        <div class="post-block-style clearfix">
+                            <div class="post-thumb">
+                                <a href="#"><img class="img-responsive" src="images/news/lifestyle/health5.jpg" alt=""></a>
+                            </div>
+                            <a class="post-cat" href="#">سلامتی</a>
+                            <div class="post-content">
+                                <h2 class="post-title title-medium">
+                                    <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از</a>
+                                </h2>
+                                <div class="post-meta">
+                                    <span class="post-author"><a href="#">جان اسنو</a></span>
+                                    <span class="post-date">30 فروردین 1396</span>
                                 </div>
-                                <a class="post-cat" href="#">سلامتی</a>
-                                <div class="post-content">
-                                    <h2 class="post-title title-medium">
-                                        <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از</a>
-                                    </h2>
-                                    <div class="post-meta">
-                                        <span class="post-author"><a href="#">جان اسنو</a></span>
-                                        <span class="post-date">30 فروردین 1396</span>
-                                    </div>
-                                </div><!-- Post content end -->
-                            </div><!-- Post Block style end -->
-                        </div><!-- Item 2 end -->
+                            </div><!-- Post content end -->
+                        </div><!-- Post Block style end -->
+                    </div><!-- Item 2 end -->
 
-                        <div class="item">
-                            <div class="post-block-style clearfix">
-                                <div class="post-thumb">
-                                    <a href="#"><img class="img-responsive" src="images/news/lifestyle/travel3.jpg" alt=""></a>
+                    <div class="item">
+                        <div class="post-block-style clearfix">
+                            <div class="post-thumb">
+                                <a href="#"><img class="img-responsive" src="images/news/lifestyle/travel3.jpg" alt=""></a>
+                            </div>
+                            <a class="post-cat" href="#">مسافرت</a>
+                            <div class="post-content">
+                                <h2 class="post-title title-medium">
+                                    <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان</a>
+                                </h2>
+                                <div class="post-meta">
+                                    <span class="post-author"><a href="#">جان اسنو</a></span>
+                                    <span class="post-date">30 فروردین 1396</span>
                                 </div>
-                                <a class="post-cat" href="#">مسافرت</a>
-                                <div class="post-content">
-                                    <h2 class="post-title title-medium">
-                                        <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان</a>
-                                    </h2>
-                                    <div class="post-meta">
-                                        <span class="post-author"><a href="#">جان اسنو</a></span>
-                                        <span class="post-date">30 فروردین 1396</span>
-                                    </div>
-                                </div><!-- Post content end -->
-                            </div><!-- Post Block style end -->
-                        </div><!-- Item 3 end -->
+                            </div><!-- Post content end -->
+                        </div><!-- Post Block style end -->
+                    </div><!-- Item 3 end -->
 
-                        <div class="item">
-                            <div class="post-block-style clearfix">
-                                <div class="post-thumb">
-                                    <a href="#"><img class="img-responsive" src="images/news/lifestyle/travel4.jpg" alt=""></a>
+                    <div class="item">
+                        <div class="post-block-style clearfix">
+                            <div class="post-thumb">
+                                <a href="#"><img class="img-responsive" src="images/news/lifestyle/travel4.jpg" alt=""></a>
+                            </div>
+                            <a class="post-cat" href="#">مسافرت</a>
+                            <div class="post-content">
+                                <h2 class="post-title title-medium">
+                                    <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با</a>
+                                </h2>
+                                <div class="post-meta">
+                                    <span class="post-author"><a href="#">جان اسنو</a></span>
+                                    <span class="post-date">30 فروردین 1396</span>
                                 </div>
-                                <a class="post-cat" href="#">مسافرت</a>
-                                <div class="post-content">
-                                    <h2 class="post-title title-medium">
-                                        <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با</a>
-                                    </h2>
-                                    <div class="post-meta">
-                                        <span class="post-author"><a href="#">جان اسنو</a></span>
-                                        <span class="post-date">30 فروردین 1396</span>
-                                    </div>
-                                </div><!-- Post content end -->
-                            </div><!-- Post Block style end -->
-                        </div><!-- Item 4 end -->
-                    </div><!-- Carousel end -->
+                            </div><!-- Post content end -->
+                        </div><!-- Post Block style end -->
+                    </div><!-- Item 4 end -->
+                </div><!-- Carousel end -->
 
-                </div><!-- Related posts end -->
-                <!-- Post comment start -->
+            </div>
+            <!-- Related posts end -->
+            
+            
+            <!-- Post comment start -->
                 <div id="comments" class="comments-area block">
                     <h3 class="block-title"><span>3 دیدگاه</span></h3>
 
