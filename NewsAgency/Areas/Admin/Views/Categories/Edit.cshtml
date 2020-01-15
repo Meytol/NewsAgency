@@ -1,62 +1,40 @@
 ﻿@model DataAccessLayer.Entities.Category
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "تغییر مشخصات دسته بندی";
     Layout = "_AdminLayout";
 }
 
-<h2>Edit</h2>
-
-<h4>Category</h4>
+<h4>تغییر مشخصات دسته بندی</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ParentId" class="control-label"></label>
-                <input asp-for="ParentId" class="form-control" />
-                <span asp-validation-for="ParentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
-                <input asp-for="CreatedOn" class="form-control" />
-                <span asp-validation-for="CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedBy" class="control-label"></label>
-                <input asp-for="UpdatedBy" class="form-control" />
-                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedOn" class="control-label"></label>
-                <input asp-for="UpdatedOn" class="form-control" />
-                <span asp-validation-for="UpdatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ViewState" class="control-label"></label>
-                <input asp-for="ViewState" class="form-control" />
-                <span asp-validation-for="ViewState" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+            
+            @using (Html.BeginForm("Edit"))
+            {
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    شناسه مادر
+                    @Html.EditorFor(c => c.ParentId)
+                    @Html.ValidationMessageFor(c => c.ParentId)
+                </div>
+                <div class="form-group">
+                    عنوان دسته بندی
+                    @Html.EditorFor(c => c.Title)
+                    @Html.ValidationMessageFor(c => c.Title)
+                </div>
+                @Html.HiddenFor(c => c.Id)
+                <div class="form-group">
+                    <input type="submit" value="ذخیره تغییرات" class="btn btn-default"/>
+                </div>
+
+            }
+           
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href="@Url.Action("Index")">بازگشت</a>
 </div>
 

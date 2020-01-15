@@ -16,13 +16,14 @@ namespace BusinessLogicLayer.Services
     {
         private readonly INewsCategoryService _newsCategoryService;
         private readonly ICategoryService _categoryService;
+        private readonly INewsSeenService _newsSeenService;
 
-        public NewsService(DatabaseContext context, INewsCategoryService newsCategoryService, ICategoryService categoryService) : base(context)
+        public NewsService(DatabaseContext context, INewsCategoryService newsCategoryService, ICategoryService categoryService, INewsSeenService newsSeenService) : base(context)
         {
             _newsCategoryService = newsCategoryService;
             _categoryService = categoryService;
+            _newsSeenService = newsSeenService;
         }
-
         public override News Add(News entity, int createdById)
         {
             entity.AuthorId = createdById;
@@ -196,6 +197,52 @@ namespace BusinessLogicLayer.Services
             }
 
             return authorNewsSetction;
+        }
+
+        public async Task<NewsPaginationSection> GetMostSeenNewses(int quentity)
+        {
+
+            var mostSeenNewses = await GetAll()
+                .Include(newsSeen => newsSeen.NewsCategories)
+                .ThenInclude(NewsCategory => NewsCategory.Category)
+                .Include(news => news.Author)
+                .Include(news => news.NewsSeens)
+                .OrderByDescending(news => news.SeenCount)
+                .Take(quentity)
+                .ToListAsync();
+
+            var wholeNewsesQuentity = 2;
+
+            var numOfPages = (quentity / wholeNewsesQuentity );
+
+            if (quentity % 2 > 0)
+                numOfPages++;
+
+            var mostSeenNewsesSection = new NewsPaginationSection
+            {
+                NewsViewModels = new List<NewsViewModel>(),
+                NumberOfPages = numOfPages
+            };
+
+            foreach (var mostSeenNews in mostSeenNewses)
+            {
+                var categoryNews = new NewsViewModel()
+                {
+                    NewsTitle = mostSeenNews.Title,
+                    NewsHeadLine = mostSeenNews.Headline,
+                    ImageUrl = mostSeenNews.ImageUrl,
+                    CategoryTitle = mostSeenNews.NewsCategories.FirstOrDefault(nc => nc.IsMain == true).Category.Title,
+                    CategoryId = mostSeenNews.NewsCategories.FirstOrDefault(nc => nc.IsMain == true).Id,
+                    NewsId = mostSeenNews.Id,
+                    CreatedOn = mostSeenNews.CreatedOn,
+                    AuthorFullName = mostSeenNews.Author.FullName,
+                    AuthorId = mostSeenNews.AuthorId
+                };
+
+                mostSeenNewsesSection.NewsViewModels.Add(categoryNews);
+            }
+
+            return mostSeenNewsesSection;
         }
     }
 }

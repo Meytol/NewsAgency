@@ -25,7 +25,7 @@ namespace NewsAgency.Areas.Admin.Controllers
         // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _categoryService.GetAllAsync());
+            return View(await _categoryService.GetAllAsyncByAdmin());
         }
 
         // GET: Admin/Categories/Details/5
@@ -36,7 +36,7 @@ namespace NewsAgency.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _categoryService.GetAsync(id.Value);
+            var category = await _categoryService.GetAsyncByAdmin(id.Value);
 
             if (category == null)
             {
@@ -46,9 +46,16 @@ namespace NewsAgency.Areas.Admin.Controllers
             return View(category);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int parentId = 0)
         {
-            return View();
+            var category = new Category();
+
+            if (parentId != 0 && _categoryService.Exists(parentId))
+            {
+                category.ParentId = parentId;
+            }
+            
+            return View(category);
         }
 
         [HttpPost]
@@ -71,7 +78,7 @@ namespace NewsAgency.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _categoryService.GetAsync(id.Value);
+            var category = await _categoryService.GetAsyncByAdmin(id.Value);
             if (category == null)
             {
                 return NotFound();
@@ -97,7 +104,7 @@ namespace NewsAgency.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_categoryService.Exists(category.Id))
+                    if (!_categoryService.ExistsByAdmin(category.Id))
                     {
                         return NotFound();
                     }
@@ -111,30 +118,20 @@ namespace NewsAgency.Areas.Admin.Controllers
             return View(category);
         }
 
-        // GET: Admin/Categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        public async Task<bool> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (!ModelState.IsValid)
+                throw new Exception("400:Badrequest");
 
-            var category = await _categoryService.GetAsync(id.Value);
+            if (!_categoryService.ExistsByAdmin(id))
+                throw new Exception("404:NotFound Data");
 
-            if (category == null)
-            {
-                return NotFound();
-            }
+            if (_categoryService.FindByAdmin(c => c.ParentId == id).Any())
+                return false;
 
-            return View(category);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
             await _categoryService.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
+            return true;
         }
     }
 }

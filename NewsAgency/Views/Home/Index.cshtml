@@ -1,5 +1,6 @@
 ﻿@{
     ViewData[index: "Title"] = "";
+    Layout = "_Layout";
 }
 
 @await Component.InvokeAsync(name: "HotNewsTile")
@@ -16,7 +17,7 @@
 
                 <div class="gap-40"></div>
 
-                @await Component.InvokeAsync(name: "CategoryNewsMain", arguments: new { @categoryId = 1, @quentity = 5 })
+                @await Component.InvokeAsync(name: "CategoryNewsMain", arguments: new { @categoryId = 6, @quentity = 5 })
 
             </div><!-- Content Col end -->
 
@@ -26,94 +27,8 @@
                         <partial name="_SocialBox" />
                     </div><!-- Widget Social box end -->
 
-                    <div class="widget color-default m-bottom-0">
-                        <h3 class="block-title">
-                            <span>لورم ایپسوم متن</span>
-                        </h3>
-
-                        <div id="post-slide" class="owl-carousel owl-theme post-slide">
-                            <div class="item">
-                                <div class="post-overaly-style text-center clearfix">
-                                    <div class="post-thumb">
-                                        <a href="#">
-                                            <img class="img-responsive" src="images/news/tech/gadget1.jpg" alt="">
-                                        </a>
-                                    </div><!-- Post thumb end -->
-
-                                    <div class="post-content">
-                                        <a class="post-cat" href="#">گجت ها</a>
-                                        <h2 class="post-title">
-                                            <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a>
-                                        </h2>
-                                        <div class="post-meta">
-                                            <span class="post-date">2 شهریور 1396</span>
-                                        </div>
-                                    </div><!-- Post content end -->
-                                </div><!-- Post Overaly Article 1 end -->
-
-                                <div class="post-overaly-style text-center clearfix">
-                                    <div class="post-thumb">
-                                        <a href="#">
-                                            <img class="img-responsive" src="images/news/video/video1.jpg" alt="">
-                                        </a>
-                                    </div><!-- Post thumb end -->
-
-                                    <div class="post-content">
-                                        <a class="post-cat" href="#">ویدئو</a>
-                                        <h2 class="post-title">
-                                            <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a>
-                                        </h2>
-                                        <div class="post-meta">
-                                            <span class="post-date">12 مرداد 1396</span>
-                                        </div>
-                                    </div><!-- Post content end -->
-                                </div><!-- Post Overaly Article 2 end -->
-
-                            </div><!-- Item 1 end -->
-
-                            <div class="item">
-
-                                <div class="post-overaly-style text-center clearfix">
-                                    <div class="post-thumb">
-                                        <a href="#">
-                                            <img class="img-responsive" src="images/news/lifestyle/health5.jpg" alt="">
-                                        </a>
-                                    </div><!-- Post thumb end -->
-
-                                    <div class="post-content">
-                                        <a class="post-cat" href="#">سلامتی</a>
-                                        <h2 class="post-title">
-                                            <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a>
-                                        </h2>
-                                        <div class="post-meta">
-                                            <span class="post-date">2 شهریور 1396</span>
-                                        </div>
-                                    </div><!-- Post content end -->
-                                </div><!-- Post Overaly Article 3 end -->
-
-                                <div class="post-overaly-style text-center clearfix">
-                                    <div class="post-thumb">
-                                        <a href="#">
-                                            <img class="img-responsive" src="images/news/tech/robot1.jpg" alt="">
-                                        </a>
-                                    </div><!-- Post thumb end -->
-
-                                    <div class="post-content">
-                                        <a class="post-cat" href="#">رباتیک</a>
-                                        <h2 class="post-title">
-                                            <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از</a>
-                                        </h2>
-                                        <div class="post-meta">
-                                            <span class="post-date">لورم ایپسوم متن</span>
-                                        </div>
-                                    </div><!-- Post content end -->
-                                </div><!-- Post Overaly Article 4 end -->
-
-                            </div><!-- Item 2 end -->
-
-                        </div><!-- Post slide carousel end -->
-
-                    </div><!-- Trending news end -->
+                    @await Component.InvokeAsync(name: "MostSeenNews", arguments: new{@quentity = 4})
+                    <!-- Trending news end -->
 
                 </div><!-- Sidebar right end -->
             </div><!-- Sidebar Col end -->
@@ -129,7 +44,7 @@
     <div class="container">
         <div class="row">
             @await Component.InvokeAsync(name: "CategoryNewsSecondary", arguments: new { @categoryId = 1, @quentity = 4 })
-            @await Component.InvokeAsync(name: "CategoryNewsSecondary", arguments: new { @categoryId = 1, @quentity = 4 })
+            @await Component.InvokeAsync(name: "CategoryNewsSecondary", arguments: new { @categoryId = 6, @quentity = 4 })
             @await Component.InvokeAsync(name: "CategoryNewsSecondary", arguments: new { @categoryId = 1, @quentity = 4 })
         </div>
     </div>
@@ -142,113 +57,12 @@
             @await Component.InvokeAsync(name: "OtherNews")
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="sidebar sidebar-right">
+                
 
                     <div class="widget color-default">
-                        <h3 class="block-title"><span>جدیدترین نقد و بررسی ها</span></h3>
-                        <div class="list-post-block">
-                            <ul class="list-post review-post-list">
-                                <li class="clearfix">
-                                    <div class="post-block-style post-float clearfix">
-                                        <div class="post-thumb">
-                                            <a href="#">
-                                                <img class="img-responsive" src="images/news/review/review1.jpg" alt="">
-                                            </a>
-                                        </div><!-- Post thumb end -->
-
-                                        <div class="post-content">
-                                            <h2 class="post-title title-small">
-                                                <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
-                                            </h2>
-                                            <div class="post-meta">
-                                                <div class="review-stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fad fa-star-half-alt"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                </div>
-                                            </div><!-- Post meta end -->
-                                        </div><!-- Post content end -->
-                                    </div><!-- Post block style end -->
-                                </li><!-- Li 1 end -->
-
-                                <li class="clearfix">
-                                    <div class="post-block-style post-float clearfix">
-                                        <div class="post-thumb">
-                                            <a href="#">
-                                                <img class="img-responsive" src="images/news/review/review2.jpg" alt="">
-                                            </a>
-                                        </div><!-- Post thumb end -->
-
-                                        <div class="post-content">
-                                            <h2 class="post-title title-small">
-                                                <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a>
-                                            </h2>
-                                            <div class="post-meta">
-                                                <div class="review-stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fad fa-star-half-alt"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div><!-- Post content end -->
-                                    </div><!-- Post block style end -->
-                                </li><!-- Li 2 end -->
-
-                                <li class="clearfix">
-                                    <div class="post-block-style post-float clearfix">
-                                        <div class="post-thumb">
-                                            <a href="#">
-                                                <img class="img-responsive" src="images/news/review/review3.jpg" alt="">
-                                            </a>
-                                        </div><!-- Post thumb end -->
-
-                                        <div class="post-content">
-                                            <h2 class="post-title title-small">
-                                                <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
-                                            </h2>
-                                            <div class="post-meta">
-                                                <div class="review-stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fad fa-star-half-alt"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div><!-- Post content end -->
-                                    </div><!-- Post block style end -->
-                                </li><!-- Li 3 end -->
-
-                                <li class="clearfix">
-                                    <div class="post-block-style post-float clearfix">
-                                        <div class="post-thumb">
-                                            <a href="#">
-                                                <img class="img-responsive" src="images/news/review/review4.jpg" alt="">
-                                            </a>
-                                        </div><!-- Post thumb end -->
-
-                                        <div class="post-content">
-                                            <h2 class="post-title title-small">
-                                                <a href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a>
-                                            </h2>
-                                            <div class="post-meta">
-                                                <div class="review-stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fad fa-star-half-alt"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div><!-- Post content end -->
-                                    </div><!-- Post block style end -->
-                                </li><!-- Li 4 end -->
-
-                            </ul><!-- List post end -->
-                        </div><!-- List post block end -->
+                        <h3 class="block-title"><span>تبلیغات</span></h3>
+                        <div id="adro-364140" style="display: inline-block; transform-origin: right top; float: none; width: 300px; height: 431.333px; transform: scale(1.00083);" class="adro-b adro-b-300x400 adro-resizable"><iframe src="https://slot.adro.co/showad/c.php?adwidth=300&amp;adheight=400&amp;aduser=1556443638&amp;awrey=32" height="400" width="300" frameborder="0" scrolling="no" style="background: #FFF; width: 300px; height:400px;"></iframe></div>
+                        <!-- List post block end -->
                     </div><!-- Latest Review Widget end -->
 
                     <partial name="_Newsletters" />

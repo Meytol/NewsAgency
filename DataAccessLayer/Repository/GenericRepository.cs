@@ -129,9 +129,9 @@ namespace DataAccessLayer.Repository
         /// <returns>
         /// return object if that's found else method returns null
         /// </returns>
-        public virtual T FindByAdmin(Expression<Func<T, bool>> match)
+        public virtual IQueryable<T> FindByAdmin(Expression<Func<T, bool>> match)
         {
-            return Context.Set<T>().FirstOrDefault(match);
+            return Context.Set<T>().Where(match);
         }
 
         /// <summary>
@@ -141,9 +141,9 @@ namespace DataAccessLayer.Repository
         /// <returns>
         /// return object if that's found else method returns null
         /// </returns>
-        public virtual async Task<T> FindAsyncByAdmin(Expression<Func<T, bool>> match)
+        public virtual async Task<List<T>> FindAsyncByAdmin(Expression<Func<T, bool>> match)
         {
-            return await Context.Set<T>().FirstOrDefaultAsync(match);
+            return await Context.Set<T>().Where(match).ToListAsync();
         }
 
         /// <summary>

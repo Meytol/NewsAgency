@@ -42,7 +42,7 @@ namespace NewsAgency.Controllers
             return View(model);
         }
 
-        public IActionResult GetNews(int categoryId, int quentity = 5, int page = 0)
+        public IActionResult GetNews(int categoryId, int quentity = 5, int page = 1)
         {
             return ViewComponent("CategoryNewsPage", new
             {

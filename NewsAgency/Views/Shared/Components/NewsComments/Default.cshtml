@@ -1,0 +1,89 @@
+﻿@model BusinessLogicLayer.ViewModels.Comment.NewsCommentSection
+    <div id="comments" class="comments-area block">
+        <h3 class="block-title">
+            <span>
+                دیدگاه
+                @Model.Comments.Count()
+            </span>
+        </h3>
+
+        @{
+            if (!@Model.Comments.Any())
+            {
+
+                <div class="text-center">
+                    <h3>
+                        متاسفانه برای این خبر دیدگاهی ثبت و تائید نشده است.
+                    </h3>
+                </div> 
+            }
+            else
+            {
+                
+            
+
+            <ul class="comments-list">
+                    <li>
+                        @{
+                            foreach (var parentComment in @Model.Comments.Where(c => c.ParentId == null || c.ParentId == 0).OrderByDescending(c => c.CreatedOn))
+                            {
+                                <div class="comment">
+                                    <img class="comment-avatar pull-left" alt="@parentComment.User.FullName" src="@parentComment.User.ProfilePictureUrl">
+                                    <div class="comment-body">
+                                        <div class="meta-data">
+                                            <span class="comment-author">
+                                                @parentComment.User.FullName
+                                            </span>
+                                            <span class="comment-date pull-right">
+                                                @parentComment.CreatedOn.Date.ToLongDateString()
+                                                -
+                                                @parentComment.CreatedOn.Date.ToLongTimeString()
+                                            </span>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>
+                                                @parentComment.Text
+                                            </p>
+                                        </div>
+                                        @*<div class="text-left">
+                                            <a class="comment-reply" href="#">پاسخ</a>
+                                        </div>*@
+                                    </div>
+                                </div>
+
+                                foreach (var childComment in @Model.Comments.Where(c => c.ParentId == parentComment.Id).OrderByDescending(c => c.CreatedOn))
+                                {
+                                    <ul class="comments-reply">
+                                        <li>
+                                            <div class="comment">
+                                                <img class="comment-avatar pull-left" alt="@childComment.User.FullName" src="@childComment.User.ProfilePictureUrl">
+                                                <div class="comment-body">
+                                                    <div class="meta-data">
+                                                        <span class="comment-author">
+                                                            @childComment.User.FullName
+                                                        </span>
+                                                        <span class="comment-date pull-right">
+                                                            @childComment.CreatedOn.Date.ToLongDateString()
+                                                            -
+                                                            @childComment.CreatedOn.Date.ToLongTimeString()
+                                                        </span>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <p>
+                                                            @childComment.Text
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div><!-- Comments end -->
+                                        </li>
+                                    </ul>
+                                }
+                            }
+                        }
+                        <!-- Comments end -->
+                    </li><!-- Comments-list li end -->
+                </ul><!-- Comments-list ul end -->
+
+            }
+        }
+    </div>

@@ -1,0 +1,132 @@
+﻿@model IEnumerable<DataAccessLayer.Entities.NewsCategory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.News)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewState)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.News.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewState)
+                </td>
+
+                <td>
+                    <a class="btn btn-warning" href="@Url.Action("Edit", "NewsCategory", new {@area = "Admin", @id = item.Id})">
+                        تغییر مشخصات
+                    </a> |
+                    <a class="btn btn-info" href="@Url.Action("Details", "NewsCategory", new {@area = "Admin", @id = item.Id})">
+                        ریز مشخصات
+                    </a> |
+                    <a class="btn btn-danger" onclick="deleteConfirmation(@item.Id)">
+                        حذف
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-success" href="@Url.Action("Create","Categories",new {@area = "Admin",})">ایجاد دسته بندی اصلی جدید</a>
+
+</p>
+
+<script>
+
+    function deleteConfirmation(id) {
+        Swal.fire({
+            title: 'آیا از حذف این داده مطمئن هستید',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'بله',
+            cancelButtonText: 'خیر'
+        }).then((result) => {
+            if (result.value) {
+                deletefunc(id);
+            }
+        });
+    };
+
+    function deletefunc(id) {
+        $.ajax({
+            url: "@Url.Action("Delete","NewsCategory",new {@Area = "Admin"})",
+            type: "POST",
+            data: {
+                id: id
+            },
+            success: function (result) {
+                if (result == true) {
+                    Swal.fire({
+                        text: 'رکورد مورد نظر با موفقیت حذف شد',
+                        icon: 'success'
+                    });
+                    $("#Row" + id).fadeOut();
+                } else if (result == false) {
+                    Swal.fire({
+                        title: 'عملیات ناموفق',
+                        text: 'برای حذف این داده ابتدا باید زیر دسته بند های این داده را حذف کنید',
+                        icon: 'error'
+                    });
+                }
+            },
+            error: function (result) {
+                Swal.fire({
+                    text: 'سرور موقتا در دسترس نیست، لطغا در زمانی دیگر مجددا تلاش کنید',
+                    icon: 'error',
+                });
+
+            }
+        });
+    }
+</script>

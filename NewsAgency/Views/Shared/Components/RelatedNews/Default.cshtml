@@ -1,0 +1,42 @@
+﻿@model BusinessLogicLayer.ViewModels.News.NewsPaginationSection
+    <h3 class="block-title"><span>اخبار مرتبط</span></h3>
+
+    <div id="latest-news-slide" class="row">
+        
+        @{
+            foreach (var news in @Model.NewsViewModels)
+            {
+                <div class="col col-md-4">
+                    <div class="post-block-style clearfix">
+                        <div class="post-thumb">
+                            <a href="@Url.Action("Index", "News", new {@id = news.NewsId})">
+                                <img class="img-responsive img-thumbnail img-md" src="@news.ImageUrl" alt="@news.NewsTitle">
+                            </a>
+                        </div>
+                        <a class="post-cat" href="@Url.Action("Index", "Category", new {@id = @news.CategoryId})">
+                            @news.CategoryTitle
+                        </a>
+                        <div class="post-content">
+                            <h2 class="post-title title-medium">
+                                <a href="@Url.Action("Index", "News", new {@id = news.NewsId})">
+                                    @news.NewsTitle
+                                </a>
+                            </h2>
+                            <div class="post-meta">
+                                <span class="post-author">
+                                    <a href="@Url.Action("Index","Author",new {@id = news.AuthorId})">
+                                        @news.AuthorFullName
+                                    </a>
+                                </span>
+                                <span class="post-date">
+                                    @news.CreatedOn.ToLongDateString()
+                                </span>
+                            </div>
+                        </div><!-- Post content end -->
+                    </div><!-- Post Block style end -->
+                </div>
+            }
+        }
+        <!-- News Item end -->
+
+    </div><!-- Carousel end -->

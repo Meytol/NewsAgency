@@ -1,25 +1,25 @@
 ﻿<!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta author="Shadi Bolbolvand"/>
-        @{
-            if (string.IsNullOrWhiteSpace(ViewData["Title"].ToString()))
-            {
-                <title>
-                    خبرگزاری اخبار موثق
-                </title>
-            }
-            else
-            {
-                <title>
-                    اخبار موثق - @ViewData["Title"]
-                </title>
-            }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta author="Shadi Bolbolvand" />
+    @{
+        if (string.IsNullOrWhiteSpace(ViewData["Title"].ToString()))
+        {
+            <title>
+                خبرگزاری اخبار موثق
+            </title>
         }
-        
+        else
+        {
+            <title>
+                اخبار موثق - @ViewData["Title"]
+            </title>
+        }
+    }
+
 
     <!--Favicon-->
     <link rel="shortcut icon" href="~/images/favicon.ico" type="image/x-icon">
@@ -27,20 +27,22 @@
 
 
     <!-- Bootstrap -->
-    <link href="~/Style/Template/bootstrap.min.css" rel="stylesheet"/>
+    <link href="~/Style/Template/bootstrap.min.css" rel="stylesheet" />
     <!-- Template styles-->
-    <link href="~/Style/Template/style.css" rel="stylesheet"/>
+    <link href="~/Style/Template/style.css" rel="stylesheet" />
     <!-- Responsive styles-->
-    <link href="~/Style/Template/responsive.css" rel="stylesheet"/>
+    <link href="~/Style/Template/responsive.css" rel="stylesheet" />
     <!-- FontAwesome -->
-    <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet"/>
+    <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" />
+    <!-- SweetAlert2 -->
+    <link href="~/lib/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" />
     <!-- Animation -->
-    <link href="~/Style/Template/animate.css" rel="stylesheet"/>
+    <link href="~/Style/Template/animate.css" rel="stylesheet" />
     <!-- Owl Carousel -->
-    <link href="~/Style/Template/owl.carousel.min.css" rel="stylesheet"/>
-    <link href="~/Style/Template/owl.theme.default.min.css" rel="stylesheet"/>
+    <link href="~/Style/Template/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Style/Template/owl.theme.default.min.css" rel="stylesheet" />
     <!-- Colorbox -->
-    <link href="~/Style/Template/colorbox.css" rel="stylesheet"/>
+    <link href="~/Style/Template/colorbox.css" rel="stylesheet" />
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
         <script src="~/Script/Template/html5shiv.js"></script>
@@ -57,48 +59,51 @@
 </head>
 <body class="boxed-layout">
 
-<div class="body-inner">
-    
-    <partial name="_TopBar"/>
+    <div class="body-inner">
 
-    @await Component.InvokeAsync(name: "Header")
+        <partial name="_TopBar" />
 
-    @await Component.InvokeAsync(name: "HotNewsHeader")
-    
+        @await Component.InvokeAsync(name: "Header")
 
-    @RenderBody()
+        @await Component.InvokeAsync(name: "HotNewsHeader")
 
-    @await Component.InvokeAsync(name: "AdvertiseBanner")
+        @RenderBody()
 
-    <partial name="_Footer"/>
+        @await Component.InvokeAsync(name: "AdvertiseBanner")
 
-</div>
+        <partial name="_Footer" />
 
-<!-- Javascript Files
-================================================== -->
-<!-- initialize jQuery Library -->
-<script src="~/Script/Template/jquery.js"></script>
-<!-- Bootstrap jQuery -->
-<script src="~/Script/Template/bootstrap.min.js"></script>
-<!-- FontAwesome -->
-<script src="~/lib/fontawesome/js/all.min.js"></script>
-<!-- Owl Carousel -->
-<script src="~/Script/Template/owl.carousel.min.js"></script>
-<!-- Counter -->
-<script src="~/Script/Template/jquery.counterup.min.js"></script>
-<!-- Waypoints -->
-<script src="~/Script/Template/waypoints.min.js"></script>
-<!-- Color box -->
-<script src="~/Script/Template/jquery.colorbox.js"></script>
-<!-- Smoothscroll -->
-<script src="~/Script/Template/smoothscroll.js"></script>
+    </div>
 
-<!-- Template custom -->
-<script src="~/Script/Template/custom.js"></script>
+    <!-- Javascript Files
+    ================================================== -->
+    <!-- initialize jQuery Library -->
+    <script src="~/Script/Template/jquery.js"></script>
+    <!-- Bootstrap jQuery -->
+    <script src="~/Script/Template/bootstrap.min.js"></script>
+    <!-- FontAwesome -->
+    <script src="~/lib/fontawesome/js/all.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="~/lib/sweetalert2/js/sweetalert2.all.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="~/Script/Template/owl.carousel.min.js"></script>
+    <!-- Counter -->
+    <script src="~/Script/Template/jquery.counterup.min.js"></script>
+    <!-- Waypoints -->
+    <script src="~/Script/Template/waypoints.min.js"></script>
+    <!-- Color box -->
+    <script src="~/Script/Template/jquery.colorbox.js"></script>
+    <!-- Smoothscroll -->
+    <script src="~/Script/Template/smoothscroll.js"></script>
 
-@RenderSection(name: "Plugins", required: false)
+    <!-- Template custom -->
+    <script src="~/Script/Template/custom.js"></script>
 
-@RenderSection(name: "Scripts", required: false)
+    @RenderSection(name: "Plugins", required: false)
+
+    <script src="~/Script/app/share/newsletters.js"></script>
+
+    @RenderSection(name: "Scripts", required: false)
 </body>
 
 </html>

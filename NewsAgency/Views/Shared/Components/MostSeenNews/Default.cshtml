@@ -1,0 +1,51 @@
+﻿@model BusinessLogicLayer.ViewModels.News.NewsPaginationSection
+<div class="widget color-default m-bottom-0">
+    <h3 class="block-title">
+        <span>پر بازدید ترین اخبار</span>
+    </h3>
+
+    <div id="post-slide" class="owl-carousel owl-theme post-slide">
+        
+        @{
+            int i = 0;
+            for (int j = 0; j < @Model.NumberOfPages; j++)
+            {
+                <div class="item">
+                @for (int k = 0; k < 2; k++)
+                {
+                    var news = @Model.NewsViewModels[i];
+
+                    <div class="post-overaly-style text-center clearfix">
+                        <div class="post-thumb">
+                            <a href="@Url.Action("Index","News",new{@id=@news.NewsId})">
+                                <img class="img-responsive" src="@news.ImageUrl" alt="@news.NewsTitle\">
+                            </a>
+                        </div><!-- Post thumb end -->
+
+                        <div class="post-content">
+                            <a class="post-cat" href="@Url.Action("Index","Category",new {@id = @news.CategoryId})">
+                                @news.CategoryTitle
+                            </a>
+                            <h2 class="post-title">
+                                <a href="@Url.Action("Index","News",new {@id = @news.NewsId})">
+                                    @news.NewsTitle
+                                </a>
+                            </h2>
+                            <div class="post-meta">
+                                <span class="post-date">
+                                    @news.CreatedOn.ToLongDateString()
+                                </span>
+                            </div>
+                        </div><!-- Post content end -->
+                    </div>
+
+                    i++;
+                }
+                </div>
+            }
+
+        }
+
+    </div><!-- Post slide carousel end -->
+
+</div>

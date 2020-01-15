@@ -7,10 +7,12 @@
                     @DateTime.Now.ToLongDateString()
                 </div>
                 <ul class="unstyled top-nav">
-                    <li><a href="#">درباره ما</a></li>
-                    <li><a href="#">برای ما بنویسید</a></li>
-                    <li><a href="#">تبلیغات</a></li>
-                    <li><a href="#">تماس</a></li>
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">صفحه نخست</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ContactUs", "Home")">درباره ما</a>
+                    </li>
                 </ul>
             </div><!--/ Top bar left end -->
 
@@ -18,19 +20,29 @@
                 <ul class="unstyled">
                     <li>
                         <a title="Facebook" href="#">
-                            <span class="social-icon"><i class="fab fa-facebook-f"></i></span>
+                            <span class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </span>
                         </a>
                         <a title="Twitter" href="#">
-                            <span class="social-icon"><i class="fab fa-twitter"></i></span>
+                            <span class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </span>
                         </a>
                         <a title="Google+" href="#">
-                            <span class="social-icon"><i class="fab fa-google-plus-g"></i></span>
+                            <span class="social-icon">
+                                <i class="fab fa-google-plus-g"></i>
+                            </span>
                         </a>
                         <a title="Linkdin" href="#">
-                            <span class="social-icon"><i class="fab fa-linkedin"></i></span>
+                            <span class="social-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </span>
                         </a>
                         <a title="Rss" href="#">
-                            <span class="social-icon"><i class="fas fa-rss"></i></span>
+                            <span class="social-icon">
+                                <i class="fas fa-rss"></i>
+                            </span>
                         </a>
                     </li>
                 </ul><!-- Ul end -->

@@ -8,6 +8,8 @@ namespace DataAccessLayer.Entities
 {
     public class Comment : IAuditable
     {
+        public string Text { get; set; }
+        public int NewsId { get; set; }
         public int AuthorId { get; set; }
         public int? ParentId { get; set; }
         public int State { get; set; } = (int) CommentState.NotApproved;
@@ -27,6 +29,7 @@ namespace DataAccessLayer.Entities
         #region Relations
 
         public User User { get; set; }
+        public News News { get; set; }
 
         #endregion
     }

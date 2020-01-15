@@ -13,5 +13,7 @@ namespace BusinessLogicLayer.IServices
         Task<OtherNewsSection> GetLastNewsAsync(int quentity);
         NewsViewModel GetNewsFull(int id);
         Task<NewsPaginationSection> GetLastNewsByAuthorIdAsync(int quentity, int authorId, int page = 1);
+        Task<NewsPaginationSection> GetMostSeenNewses(int quentity);
+
     }
 }

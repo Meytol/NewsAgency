@@ -75,7 +75,8 @@ namespace DataAccessLayer.Repository
         /// <returns>
         /// return object if that's found else method returns null
         /// </returns>
-        T FindByAdmin(Expression<Func<T, bool>> match);
+        IQueryable<T> FindByAdmin(Expression<Func<T, bool>> match);
+
         /// <summary>
         /// Find object async by some expression even that's ViewState set to Deleted
         /// </summary>
@@ -83,7 +84,7 @@ namespace DataAccessLayer.Repository
         /// <returns>
         /// return object if that's found else method returns null
         /// </returns>
-        Task<T> FindAsyncByAdmin(Expression<Func<T, bool>> match);
+        Task<List<T>> FindAsyncByAdmin(Expression<Func<T, bool>> match);
 
         /// <summary>
         /// Find objects by some expression even those's ViewState set to Deleted

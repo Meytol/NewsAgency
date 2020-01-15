@@ -16,6 +16,7 @@ namespace DataAccessLayer.Entities
         public string ImageUrl { get; set; }
         public int AuthorId { get; set; }
         public int Status { get; set; } = (int) NewsStatus.WaitingForConfirmation;
+        public int SeenCount { get; set; } = 0;
 
         #region IAuditable Properties
 

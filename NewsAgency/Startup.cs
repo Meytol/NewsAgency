@@ -46,10 +46,12 @@ namespace NewsAgency
             services.AddTransient<IActionService, ActionService>();
             services.AddTransient<IAdvertiseService, AdvertiseService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IHotNewsService, HotNewsService>();
             services.AddTransient<ILinkService, LinkService>();
             services.AddTransient<INewsCategoryService, NewsCategoryService>();
-            services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<INewsService, NewsService>(); 
+            services.AddTransient<INewsSeenService, NewsSeenService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IRoleActionService, RoleActionService>();
             services.AddTransient<ISubscriberService, SubscriberService>();

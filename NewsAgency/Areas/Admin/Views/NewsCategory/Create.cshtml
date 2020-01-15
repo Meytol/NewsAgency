@@ -1,0 +1,38 @@
+﻿@model DataAccessLayer.Entities.NewsCategory
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                شناسه دسته بندی
+                <select asp-for="CategoryId" name="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                شناسه خبر
+                <select asp-for="NewsId" name="NewsId" class ="form-control" asp-items="ViewBag.NewsId"></select>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsMain" /> @Html.DisplayNameFor(model => model.IsMain)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ایجاد" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="@Url.Action("Index")">بازگشت</a>
+</div>
+

@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Entities;
 using NewsAgency.Authentication.Controllers;
+using System;
 
- namespace NewsAgency.Areas.Admin.Controllers
+namespace NewsAgency.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class NewsController : BaseController
@@ -109,12 +110,17 @@ using NewsAgency.Authentication.Controllers;
             return View(news);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<HttpStatusCode> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<bool> Delete(int id)
         {
-             await _newsService.DeleteAsync(id);
-            return HttpStatusCode.OK;
+            if (!ModelState.IsValid)
+                throw new Exception("400:Badrequest");
+
+            if (!_newsService.ExistsByAdmin(id))
+                throw new Exception("404:NotFound Data");
+
+            await _newsService.DeleteAsync(id);
+            return true;
         }
 
     }

@@ -1,54 +1,40 @@
 ﻿@model DataAccessLayer.Entities.Category
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "ریز جزئیات";
     Layout = "_AdminLayout";
 }
 
-<h2>Details</h2>
+<h2>ریز جزئیات دسته بندی</h2>
 
 <div>
-    <h4>Category</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ParentId)
+            شناسه والد
         </dt>
         <dd>
             @Html.DisplayFor(model => model.ParentId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            عنوان
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            ساخته شده توسط
         </dt>
         <dd>
             @Html.DisplayFor(model => model.CreatedBy)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
+            ساخته شده در
         </dt>
         <dd>
             @Html.DisplayFor(model => model.CreatedOn)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedBy)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedOn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedOn)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ViewState)
+            وضعیت نمایش
         </dt>
         <dd>
             @Html.DisplayFor(model => model.ViewState)
@@ -56,6 +42,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a @Url.Action("Edit" , "Categories", new {@Area = "Admin",@id=@Model.Id}) >تغییر مشخصات</a> |
+    <a @Url.Action("Index", "Categories", new { @Area = "Admin"}) >بازگشت</a>
 </div>

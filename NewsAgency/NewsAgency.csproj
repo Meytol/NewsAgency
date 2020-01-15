@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Authentication\Cookies\**" />
     <Compile Remove="wwwroot\lib\bower_components\fullcalendar\**" />
-    <Content Remove="Authentication\Cookies\**" />
     <Content Remove="wwwroot\lib\bower_components\fullcalendar\**" />
-    <EmbeddedResource Remove="Authentication\Cookies\**" />
     <EmbeddedResource Remove="wwwroot\lib\bower_components\fullcalendar\**" />
-    <None Remove="Authentication\Cookies\**" />
     <None Remove="wwwroot\lib\bower_components\fullcalendar\**" />
   </ItemGroup>
 
@@ -2630,6 +2626,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Categories\" />
     <Folder Include="Areas\Admin\Views\News\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\images\banner-ads\" />
     <Folder Include="wwwroot\images\logos\" />
@@ -2639,7 +2636,6 @@
     <Folder Include="wwwroot\images\news\tech\" />
     <Folder Include="wwwroot\images\news\video\" />
     <Folder Include="wwwroot\Script\AdminTemplate\pages\" />
-    <Folder Include="wwwroot\Script\app\" />
     <Folder Include="wwwroot\Style\app\" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using BusinessLogicLayer.IServices;
+using BusinessLogicLayer.ViewModels.News;
 using DataAccessLayer.Database;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Repository;

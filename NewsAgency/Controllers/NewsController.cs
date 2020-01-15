@@ -27,7 +27,19 @@ namespace NewsAgency.Controllers
 
             var model = _newsService.GetNewsFull(id);
 
+            ViewData["Title"] = model.NewsTitle;
+            ViewBag.CategoryId = model.CategoryId;
+
             return View(model);
+        }
+
+        public IActionResult GetRelatedNews(int categoryId, int quentity = 3)
+        {
+            return ViewComponent("RelatedNews", new
+            {
+                categoryId,
+                quentity
+            });
         }
     }
 }
